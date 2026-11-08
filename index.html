@@ -176,6 +176,8 @@ button{cursor:pointer}
 .irow small{display:block;color:var(--muted);font-size:11.5px}
 .irow .v{text-align:left;font-weight:700;font-size:15px;font-variant-numeric:tabular-nums;white-space:nowrap}
 .irow .v small{font-weight:500}
+.spinning svg{animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(-360deg)}}
 .dl{display:inline-flex;font-size:11px;font-weight:700;border-radius:999px;padding:0 8px;margin-top:2px}
 .dl.up{color:var(--up);background:var(--up-bg)} .dl.down{color:var(--down);background:var(--down-bg)}
 .bigusd{display:grid;gap:2px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--accent-ink);border-radius:22px;padding:16px 18px;box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
@@ -353,8 +355,8 @@ nav button[aria-selected="true"]{background:var(--accent-soft);color:var(--accen
 "use strict";
 /* ====== تنظیمات: این‌ها را در صورت نیاز عوض کن ====== */
 var CFG={
-  WORKER:"",                                   /* آدرس Worker کلودفلر، مثل https://market-reaction-bot.xxx.workers.dev */
-  TOOLS:{news:"https://edri3i.github.io/market-reaction/",rsi:"https://edri3i.github.io/RSI/rsi-scanner.html"},
+  WORKER:"https://market-reaction-bot.ali-alasmia77.workers.dev",                                   /* آدرس Worker کلودفلر، مثل https://market-reaction-bot.xxx.workers.dev */
+  TOOLS:{news:"reaction.html",rsi:"https://edri3i.github.io/RSI/rsi-scanner.html"},
   REFRESH_MS:45000
 };
 /* ================================================== */
@@ -691,7 +693,7 @@ $("#hlBtn").addEventListener("click",loadHL);
 renderLinks();
 
 /* ---------- domestic prices ---------- */
-var IR_SRC=["https://raw.githubusercontent.com/itsyebekhe/nabz/main/market.json","https://cdn.jsdelivr.net/gh/itsyebekhe/nabz@main/market.json"];
+var IR_SRC=["https://itsyebekhe.github.io/nabz/market.json","https://raw.githubusercontent.com/itsyebekhe/nabz/main/market.json","https://cdn.jsdelivr.net/gh/itsyebekhe/nabz@main/market.json"];
 var IR_FX=[["usd","دلار آمریکا","🇺🇸",1],["eur","یورو","🇪🇺",1],["gbp","پوند انگلیس","🇬🇧",1],["aed","درهم امارات","🇦🇪",1],["try","لیر ترکیه","🇹🇷",1],["cad","دلار کانادا","🇨🇦",1],["aud","دلار استرالیا","🇦🇺",1],["cny","یوان چین","🇨🇳",1],["chf","فرانک سوئیس","🇨🇭",1],["sar","ریال عربستان","🇸🇦",1],["qar","ریال قطر","🇶🇦",1],["kwd","دینار کویت","🇰🇼",1],["rub","روبل روسیه","🇷🇺",1],["jpy","ین ژاپن","🇯🇵",100]];
 var IR_COIN=[["coin_emami","سکه امامی"],["coin_bahar","سکه بهار آزادی"],["coin_half","نیم‌سکه"],["coin_quarter","ربع‌سکه"],["coin_gram","سکه گرمی"]];
 var irAt=0,irBusy=false,irData=null,irPrev=null;
@@ -729,9 +731,13 @@ function irRender(d){
 async function loadIran(){
   if(irBusy)return;irBusy=true;
   var d=null;
-  for(var i=0;i<IR_SRC.length&&!d;i++){
-    try{d=await getJSON(IR_SRC[i]+"?t="+Math.floor(Date.now()/60000),15000)}catch(e){}
-  }
+  $("#irRefresh").classList.add("spinning");
+  var rs=await Promise.allSettled(IR_SRC.map(function(u){return getJSON(u+"?t="+Date.now(),15000)}));
+  rs.forEach(function(r){
+    if(r.status==="fulfilled"&&r.value&&isFinite(r.value.usd)){
+      if(!d||String(r.value.updated_at||"")>String(d.updated_at||""))d=r.value;
+    }
+  });
   if(d&&isFinite(d.usd)){
     var stored=irPrevLoad();
     var vals={};Object.keys(d).forEach(function(k){if(typeof d[k]==="number")vals[k]=d[k]});
@@ -742,13 +748,15 @@ async function loadIran(){
     irData=d;
     irRender(Object.assign({},d));
     $("#irDot").classList.remove("off");
-    $("#irTxt").textContent="آخرین به‌روزرسانی منبع: "+(d.date_shamsi_full||"")+"، ساعت "+fa(d.time||"");
+    $("#irTxt").textContent="قیمت منبع: "+(d.date_shamsi_full||"")+"، ساعت "+(d.time?String(d.time).replace(/\d/g,function(x){return "۰۱۲۳۴۵۶۷۸۹"[x]}):"");
   }else{
     $("#irDot").classList.add("off");
     $("#irTxt").textContent=irData?"اتصال برقرار نشد، قیمت قبلی نمایش داده می‌شود":"اتصال به منبع قیمت برقرار نشد";
     if(!irData)$("#irUsd").innerHTML='<small>دلار آمریکا</small><div class="v">—</div><small>اتصال برقرار نشد. دوباره تلاش کن.</small>';
   }
   irAt=Date.now();irBusy=false;
+  $("#irRefresh").classList.remove("spinning");
+  if(d)$("#irTxt").textContent+="، بررسی شد "+new Date().toLocaleTimeString("fa-IR",{hour:"2-digit",minute:"2-digit"});
 }
 $("#irRefresh").addEventListener("click",loadIran);
 setInterval(function(){if(current==="iran"&&Date.now()-irAt>300000)loadIran()},30000);

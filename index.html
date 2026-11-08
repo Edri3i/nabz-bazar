@@ -100,7 +100,7 @@ button{cursor:pointer}
 .asset.enter{animation:rise .55s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0) * 40ms)}
 @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 .logo{width:42px;height:42px;border-radius:50%;background:var(--surface2);border:1px solid var(--line);display:grid;place-items:center;overflow:hidden;position:relative;flex:none}
-.logo img{width:100%;height:100%;object-fit:cover;display:block}
+.logo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:var(--surface2)}
 .logo .ini{font-weight:900;color:var(--accent);font-size:15px}
 .pair{width:42px;height:42px;position:relative}
 .pair span{position:absolute;width:28px;height:28px;border-radius:50%;background:var(--surface2);border:2px solid var(--surface);display:grid;place-items:center;font-size:16px;line-height:1;box-shadow:0 1px 4px rgba(0,0,0,.18)}
@@ -166,6 +166,25 @@ button{cursor:pointer}
 .tvl .tb i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:999px;transition:width .8s}
 .tvl .v{direction:ltr;font-variant-numeric:tabular-nums;font-weight:700}
 
+
+/* ---------- domestic (Iran) tab ---------- */
+.irow{display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:10px;align-items:center;padding:9px 0;border-top:1px solid var(--line)}
+.irow:first-of-type{border-top:0}
+.irow .ic{width:40px;height:40px;border-radius:50%;background:var(--surface2);border:1px solid var(--line);display:grid;place-items:center;font-size:20px;line-height:1;overflow:hidden}
+.irow .ic svg{width:40px;height:40px;display:block}
+.irow b{display:block;font-size:14px;font-weight:700}
+.irow small{display:block;color:var(--muted);font-size:11.5px}
+.irow .v{text-align:left;font-weight:700;font-size:15px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.irow .v small{font-weight:500}
+.dl{display:inline-flex;font-size:11px;font-weight:700;border-radius:999px;padding:0 8px;margin-top:2px}
+.dl.up{color:var(--up);background:var(--up-bg)} .dl.down{color:var(--down);background:var(--down-bg)}
+.bigusd{display:grid;gap:2px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--accent-ink);border-radius:22px;padding:16px 18px;box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
+.bigusd::after{content:"$";position:absolute;inset-inline-start:-6px;bottom:-34px;font-size:150px;font-weight:900;opacity:.12;line-height:1}
+.bigusd small{opacity:.85;font-size:12.5px}
+.bigusd .v{font-size:34px;font-weight:900;font-variant-numeric:tabular-nums;line-height:1.3}
+.bigusd .v span{font-size:14px;font-weight:500;margin-inline-start:6px}
+.bigusd .dl{background:rgba(255,255,255,.22);color:inherit;justify-self:start}
+
 /* ---------- tool tabs ---------- */
 .panel{display:none}
 .panel.on{display:block}
@@ -182,8 +201,8 @@ button{cursor:pointer}
 /* ---------- bottom nav ---------- */
 nav{position:fixed;inset:auto 0 0 0;z-index:20;background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   border-top:1px solid var(--line);padding:6px max(10px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-left,0px))}
-nav .in{max-width:680px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
-nav button{border:0;background:transparent;border-radius:18px;padding:6px 2px 4px;display:grid;justify-items:center;gap:1px;color:var(--muted);font-size:11px;font-weight:500;white-space:nowrap;transition:background .2s,color .2s}
+nav .in{max-width:680px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:2px}
+nav button{border:0;background:transparent;border-radius:18px;padding:6px 0 4px;display:grid;justify-items:center;gap:1px;color:var(--muted);font-size:10.5px;font-weight:500;white-space:nowrap;transition:background .2s,color .2s}
 nav button svg{width:24px;height:24px}
 nav button[aria-selected="true"]{background:var(--accent-soft);color:var(--accent);font-weight:700}
 @media (prefers-reduced-motion:reduce){
@@ -247,6 +266,29 @@ nav button[aria-selected="true"]{background:var(--accent-soft);color:var(--accen
   </div>
 </main>
 
+<main id="iran" class="panel" aria-label="بازار داخلی">
+  <div class="wrap">
+    <header class="hero">
+      <div class="hero-top">
+        <div>
+          <div class="by">Written by Ali Edrisi</div>
+          <h1>داخلی</h1>
+          <p>قیمت ارز، طلا و سکه در بازار ایران به تومان</p>
+        </div>
+        <div class="tools"><button type="button" class="pill-btn" id="irRefresh" aria-label="به‌روزرسانی">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg></button></div>
+      </div>
+      <div class="live"><span class="dot" id="irDot"></span><span id="irTxt">در حال دریافت...</span></div>
+    </header>
+    <div class="bigusd" id="irUsd"><small>دلار آمریکا</small><div class="v">—</div></div>
+    <section class="card" aria-label="ارزها"><h2>ارزها <small>تومان</small></h2><div id="irFx"></div></section>
+    <section class="card" aria-label="طلا"><h2>طلا <small>تومان</small></h2><div id="irGold"></div></section>
+    <section class="card" aria-label="سکه"><h2>سکه <small>تومان</small></h2><div id="irCoin"></div></section>
+    <section class="card" aria-label="جهانی"><h2>بازار جهانی <small>دلار</small></h2><div id="irWorld"></div></section>
+    <div class="foot">قیمت‌ها تقریبی و از پروژه متن‌باز <a href="https://github.com/itsyebekhe/nabz" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">nabz</a> گرفته می‌شود که خودش از سایت علان‌چنج می‌خواند. هر ۳۰ دقیقه به‌روز می‌شود و ممکن است با قیمت لحظه‌ای بازار تفاوت داشته باشد. عیارهای ۲۰، ۲۱، ۲۲، ۲۴ و ۱۴ از روی ۱۸ عیار محاسبه می‌شوند.</div>
+  </div>
+</main>
+
 <main id="smart" class="panel" aria-label="پول هوشمند">
   <div class="wrap">
     <header class="hero">
@@ -296,6 +338,8 @@ nav button[aria-selected="true"]{background:var(--accent-soft);color:var(--accen
 <nav aria-label="بخش‌ها"><div class="in" role="tablist">
   <button type="button" role="tab" data-tab="pulse" aria-selected="true">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2.5-7 4 14 2.5-7H21"/></svg><span>نبض</span></button>
+  <button type="button" role="tab" data-tab="iran" aria-selected="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9 9.5h4.2a1.8 1.8 0 0 1 0 3.5H9.8a1.8 1.8 0 0 0 0 3.5H15"/></svg><span>داخلی</span></button>
   <button type="button" role="tab" data-tab="smart" aria-selected="false">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20c2-5 5-8 9-8s7 3 9 8"/><circle cx="12" cy="7" r="3.2"/></svg><span>پول هوشمند</span></button>
   <button type="button" role="tab" data-tab="news" aria-selected="false">
@@ -322,7 +366,9 @@ function fa(n){return Number(n).toLocaleString("fa-IR")}
 
 /* ---------- theme ---------- */
 var root=document.documentElement;
-function setTheme(m){if(m==="light"||m==="dark")root.setAttribute("data-theme",m);else root.removeAttribute("data-theme");ls("np_theme",m||"")}
+function curTheme(){return root.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}
+function syncFrames(){["news","rsi"].forEach(function(k){var f=document.getElementById("if-"+k);try{f&&f.contentWindow&&f.contentWindow.postMessage({type:"np-theme",theme:curTheme()},"*")}catch(e){}})}
+function setTheme(m){if(m==="light"||m==="dark")root.setAttribute("data-theme",m);else root.removeAttribute("data-theme");ls("np_theme",m||"");syncFrames()}
 $("#theme").addEventListener("click",function(){
   var cur=root.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
   setTheme(cur==="dark"?"light":"dark");
@@ -644,16 +690,81 @@ async function loadSmart(){
 $("#hlBtn").addEventListener("click",loadHL);
 renderLinks();
 
+/* ---------- domestic prices ---------- */
+var IR_SRC=["https://raw.githubusercontent.com/itsyebekhe/nabz/main/market.json","https://cdn.jsdelivr.net/gh/itsyebekhe/nabz@main/market.json"];
+var IR_FX=[["usd","دلار آمریکا","🇺🇸",1],["eur","یورو","🇪🇺",1],["gbp","پوند انگلیس","🇬🇧",1],["aed","درهم امارات","🇦🇪",1],["try","لیر ترکیه","🇹🇷",1],["cad","دلار کانادا","🇨🇦",1],["aud","دلار استرالیا","🇦🇺",1],["cny","یوان چین","🇨🇳",1],["chf","فرانک سوئیس","🇨🇭",1],["sar","ریال عربستان","🇸🇦",1],["qar","ریال قطر","🇶🇦",1],["kwd","دینار کویت","🇰🇼",1],["rub","روبل روسیه","🇷🇺",1],["jpy","ین ژاپن","🇯🇵",100]];
+var IR_COIN=[["coin_emami","سکه امامی"],["coin_bahar","سکه بهار آزادی"],["coin_half","نیم‌سکه"],["coin_quarter","ربع‌سکه"],["coin_gram","سکه گرمی"]];
+var irAt=0,irBusy=false,irData=null,irPrev=null;
+function tm(n){return Number(Math.round(n)).toLocaleString("fa-IR")}
+function irPrevLoad(){try{return JSON.parse(ls("np_ir_prev")||"null")}catch(e){return null}}
+function irDelta(k,v){
+  if(!irPrev||!irPrev.v||!isFinite(irPrev.v[k])||!irPrev.v[k]||irPrev.v[k]===v)return "";
+  var c=(v-irPrev.v[k])/irPrev.v[k]*100,d=c>0?"up":"down";
+  return '<span class="dl '+d+'">'+(c>0?"▲ +":"▼ ")+Math.abs(c).toFixed(2)+'%</span>';
+}
+function irRow(ic,name,sub,k,v){
+  return '<div class="irow"><div class="ic">'+ic+'</div><div><b>'+esc(name)+'</b>'+(sub?'<small>'+esc(sub)+'</small>':'')+'</div><div class="v">'+tm(v)+'<small> تومان</small><br>'+irDelta(k,v)+'</div></div>';
+}
+function irRender(d){
+  var u=d.usd,dl=irDelta("usd",u);
+  $("#irUsd").innerHTML='<small>دلار آمریکا</small><div class="v">'+tm(u)+'<span>تومان</span></div>'+dl;
+  $("#irFx").innerHTML=IR_FX.filter(function(f){return f[0]!=="usd"&&isFinite(d[f[0]])}).map(function(f){return irRow(f[2],f[1],f[3]>1?"هر "+fa(f[3])+" واحد":"",f[0],d[f[0]]*(f[3]||1)/(f[3]||1))}).join("");
+  var g="";
+  if(isFinite(d.gold_mesghal))g+=irRow(iconSvg("gold"),"مثقال طلای آبشده","هر مثقال","gold_mesghal",d.gold_mesghal);
+  if(isFinite(d.gold_18k)){
+    [[24,"۲۴ عیار"],[22,"۲۲ عیار"],[21,"۲۱ عیار"],[20,"۲۰ عیار"],[18,"۱۸ عیار"],[14,"۱۴ عیار"]].forEach(function(k){
+      var v=d.gold_18k*k[0]/18;
+      g+=irRow(iconSvg("gold"),"طلای "+k[1],k[0]===18?"هر گرم":"هر گرم، محاسبه‌شده","k"+k[0],v);
+    });
+  }
+  $("#irGold").innerHTML=g||'<div class="msg">داده‌ای نیست.</div>';
+  $("#irCoin").innerHTML=IR_COIN.filter(function(c){return isFinite(d[c[0]])}).map(function(c){return irRow(iconSvg("gold"),c[1],"",c[0],d[c[0]])}).join("");
+  var w="";
+  var ou=d.gold_ounce||d.usd_xau;
+  if(isFinite(ou))w+='<div class="irow"><div class="ic">'+iconSvg("gold")+'</div><div><b>اونس جهانی طلا</b></div><div class="v"><span class="num">$'+fmt(ou,2)+'</span></div></div>';
+  var oil=parseFloat(d.oil);
+  if(isFinite(oil))w+='<div class="irow"><div class="ic">'+iconSvg("oil2")+'</div><div><b>نفت برنت</b></div><div class="v"><span class="num">$'+fmt(oil,2)+'</span></div></div>';
+  $("#irWorld").innerHTML=w||'<div class="msg">داده‌ای نیست.</div>';
+}
+async function loadIran(){
+  if(irBusy)return;irBusy=true;
+  var d=null;
+  for(var i=0;i<IR_SRC.length&&!d;i++){
+    try{d=await getJSON(IR_SRC[i]+"?t="+Math.floor(Date.now()/60000),15000)}catch(e){}
+  }
+  if(d&&isFinite(d.usd)){
+    var stored=irPrevLoad();
+    var vals={};Object.keys(d).forEach(function(k){if(typeof d[k]==="number")vals[k]=d[k]});
+    [24,22,21,20,18,14].forEach(function(k){if(isFinite(d.gold_18k))vals["k"+k]=d.gold_18k*k/18});
+    if(stored&&stored.stamp!==d.updated_at){irPrev={v:stored.v};ls("np_ir_prev",JSON.stringify({stamp:d.updated_at,v:vals,prevOf:stored.v}))}
+    else if(stored&&stored.stamp===d.updated_at&&stored.prevOf){irPrev={v:stored.prevOf}}
+    else{irPrev=null;if(!stored)ls("np_ir_prev",JSON.stringify({stamp:d.updated_at,v:vals}))}
+    irData=d;
+    irRender(Object.assign({},d));
+    $("#irDot").classList.remove("off");
+    $("#irTxt").textContent="آخرین به‌روزرسانی منبع: "+(d.date_shamsi_full||"")+"، ساعت "+fa(d.time||"");
+  }else{
+    $("#irDot").classList.add("off");
+    $("#irTxt").textContent=irData?"اتصال برقرار نشد، قیمت قبلی نمایش داده می‌شود":"اتصال به منبع قیمت برقرار نشد";
+    if(!irData)$("#irUsd").innerHTML='<small>دلار آمریکا</small><div class="v">—</div><small>اتصال برقرار نشد. دوباره تلاش کن.</small>';
+  }
+  irAt=Date.now();irBusy=false;
+}
+$("#irRefresh").addEventListener("click",loadIran);
+setInterval(function(){if(current==="iran"&&Date.now()-irAt>300000)loadIran()},30000);
+
 /* ---------- tabs ---------- */
 var current="pulse",loaded={};
 function show(tab){
-  if(["pulse","smart","news","rsi"].indexOf(tab)<0)tab="pulse";
+  if(["pulse","iran","smart","news","rsi"].indexOf(tab)<0)tab="pulse";
   current=tab;
   $$("nav button").forEach(function(b){b.setAttribute("aria-selected",b.getAttribute("data-tab")===tab?"true":"false")});
   $("#pulse").classList.toggle("on",tab==="pulse");
   $("#smart").classList.toggle("on",tab==="smart");
+  $("#iran").classList.toggle("on",tab==="iran");
   $$(".frame").forEach(function(f){f.classList.toggle("on",f.id==="frame-"+tab)});
   if(tab==="news"||tab==="rsi")openFrame(tab);
+  else if(tab==="iran"){window.scrollTo(0,0);if(Date.now()-irAt>120000)loadIran()}
   else if(tab==="smart"){window.scrollTo(0,0);if(Date.now()-smAt>120000)loadSmart()}
   else{window.scrollTo(0,0);if(Date.now()>=nextAt)tick()}
   ls("np_tab",tab);
@@ -665,9 +776,9 @@ function openFrame(k,force){
   if(loaded[k]&&!force)return;
   loaded[k]=true;
   var ld=$("#ld-"+k);ld.classList.remove("hide");$("#hint-"+k).hidden=true;
-  f.onload=function(){ld.classList.add("hide")};
+  f.onload=function(){ld.classList.add("hide");syncFrames()};
   setTimeout(function(){if(!ld.classList.contains("hide"))$("#hint-"+k).hidden=false},12000);
-  f.src=CFG.TOOLS[k]+(force?(CFG.TOOLS[k].indexOf("?")<0?"?":"&")+"r="+Date.now():"");
+  f.src=CFG.TOOLS[k]+(CFG.TOOLS[k].indexOf("?")<0?"?":"&")+"hub=1&t="+curTheme()+(force?"&r="+Date.now():"");
 }
 $("nav").addEventListener("click",function(e){var b=e.target.closest("button");if(b)show(b.getAttribute("data-tab"))});
 $$("[data-reload]").forEach(function(b){b.addEventListener("click",function(){openFrame(b.getAttribute("data-reload"),true)})});

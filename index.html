@@ -187,6 +187,40 @@ button{cursor:pointer}
 .bigusd .v span{font-size:14px;font-weight:500;margin-inline-start:6px}
 .bigusd .dl{background:rgba(255,255,255,.22);color:inherit;justify-self:start}
 
+
+.fg{display:grid;gap:8px}
+.fgv{display:flex;align-items:baseline;gap:10px}
+.fgv b{font-size:38px;font-weight:900;line-height:1;font-variant-numeric:tabular-nums}
+.fgv span{font-size:15px;font-weight:700}
+.fgbar{position:relative;height:12px;border-radius:999px;background:linear-gradient(90deg,#d9473c,#e7a93c 50%,#12907a);direction:ltr}
+.fgbar i{position:absolute;top:-4px;width:6px;height:20px;border-radius:4px;background:var(--fg);border:2px solid var(--surface);transform:translateX(-50%);transition:left .8s}
+.fgm{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted)}
+.big .sp{width:100%;height:64px}
+.big .sp .dt{display:none}
+.kv{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:13px}
+.kv b{font-variant-numeric:tabular-nums;direction:ltr}
+.oi{display:grid;gap:3px;padding:8px 0;border-top:1px solid var(--line)}
+.oi:first-of-type{border-top:0}
+.oi .h{display:flex;justify-content:space-between;align-items:baseline;font-size:14px}
+.oi .x{display:flex;gap:6px;flex-wrap:wrap;font-size:12px}
+.oi .why{font-size:12.5px;color:var(--muted)}
+.fnd{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;font-size:13px;padding:5px 0;border-top:1px solid var(--line);align-items:center}
+.fnd:first-of-type{border-top:0}
+.fnd .r{direction:ltr;font-weight:700;font-variant-numeric:tabular-nums}
+.sub{font-size:12px;font-weight:700;color:var(--accent);margin-top:4px}
+.wal{display:grid;gap:6px;padding:9px 0;border-top:1px solid var(--line)}
+.wal:first-of-type{border-top:0}
+.wal .top{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:10px;align-items:center;font-size:13px}
+.wal .rk{width:24px;height:24px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-size:12px;font-weight:700}
+.wal .top a{color:var(--fg);text-decoration:none;direction:ltr;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wal .pnl{direction:ltr;font-weight:700;color:var(--up);font-variant-numeric:tabular-nums}
+.pos{display:flex;gap:6px;flex-wrap:wrap}
+.ps{font-size:11.5px;font-weight:700;border-radius:999px;padding:1px 9px;direction:ltr;font-variant-numeric:tabular-nums}
+.ps.L{color:var(--up);background:var(--up-bg)} .ps.S{color:var(--down);background:var(--down-bg)}
+.agg{display:grid;gap:3px;margin-bottom:6px}
+.agg .t{display:flex;justify-content:space-between;font-size:13px}
+.agg .bar{height:9px}
+
 /* ---------- tool tabs ---------- */
 .panel{display:none}
 .panel.on{display:block}
@@ -298,17 +332,41 @@ nav button[aria-selected="true"]{background:var(--accent-soft);color:var(--accen
       <div class="live"><span class="dot" id="smDot"></span><span id="smTxt">در حال دریافت...</span></div>
     </header>
 
+    <section class="card" aria-label="ترس و طمع">
+      <h2>ترس و طمع <small>بازار ارز دیجیتال</small></h2>
+      <div class="fg" id="fgBox"><div class="sk s"></div></div>
+    </section>
+
+    <section class="card" aria-label="جریان استیبل‌کوین">
+      <h2>جریان استیبل‌کوین <small>۳۰ روز</small></h2>
+      <p class="d">افزایش کل استیبل‌کوین‌ها یعنی نقدینگی تازه وارد بازار شده و معمولاً برای قیمت‌ها مثبت است.</p>
+      <div id="stBox"><div class="sk s"></div></div>
+    </section>
+
     <section class="card" aria-label="بایننس فیوچرز">
       <h2>بایننس فیوچرز <small>معامله‌گران برتر</small></h2>
       <p class="d">سهم موقعیت‌های خرید و فروش بزرگ‌ترین معامله‌گران، به‌علاوه نرخ تأمین مالی. نرخ مثبت یعنی خریداران به فروشندگان پول می‌دهند.</p>
       <div id="bnList"><div class="sk s"></div></div>
     </section>
 
+    <section class="card" aria-label="سرمایه باز">
+      <h2>سرمایه باز و قیمت <small>۲۴ ساعت</small></h2>
+      <p class="d">اگر قیمت و سرمایه باز هر دو بالا بروند، پول تازه وارد شده و روند قوی‌تر است. اگر قیمت بالا برود ولی سرمایه باز کم شود، حرکت بیشتر بستن فروش‌هاست و ضعیف‌تر است.</p>
+      <div id="oiList"><div class="sk s"></div></div>
+    </section>
+
+    <section class="card" aria-label="نرخ تأمین مالی">
+      <h2>تراکم نرخ تأمین مالی <small>بین پرحجم‌ترین‌ها</small></h2>
+      <p class="d">نرخ خیلی مثبت یعنی خریداران زیادی با اهرم وارد شده‌اند و ریسک ریزش بالاست. نرخ خیلی منفی یعنی فروشنده‌ها زیادند و ریسک جهش ناگهانی بالاست.</p>
+      <div id="fnList"><div class="sk s"></div></div>
+    </section>
+
     <section class="card" aria-label="هایپرلیکوید">
       <h2>هایپرلیکوید <small>برترین کیف‌پول‌ها</small></h2>
-      <p class="d">برترین کیف‌پول‌ها بر اساس سود ۳۰ روز گذشته از جدول رسمی. با زدن هر آدرس، موقعیت‌های باز آن را در خود هایپرلیکوید ببین.</p>
+      <p class="d">ده کیف‌پول با بیشترین سود ۳۰ روز گذشته و موقعیت‌های بازشان. خرید با رنگ سبز و فروش با رنگ قرمز و عدد کنار آن اهرم است.</p>
+      <div id="hlAgg"></div>
       <div id="hlList"></div>
-      <button type="button" class="btn" id="hlBtn">نمایش برترین‌ها</button>
+      <button type="button" class="btn" id="hlBtn">نمایش برترین‌ها و موقعیت‌هایشان</button>
     </section>
 
     <section class="card" aria-label="دیفی لاما">
@@ -669,18 +727,85 @@ async function loadLlama(){
   var mx=j[0].tvl;
   $("#dlList").innerHTML=j.map(function(c){return '<div class="tvl"><span>'+esc(c.name)+'</span><span class="v">'+usd(c.tvl)+'</span><div class="tb"><i style="width:'+(c.tvl/mx*100).toFixed(1)+'%"></i></div></div>'}).join("");
 }
+function postJSON(url,body,ms){
+  return new Promise(function(res,rej){
+    var ctl=("AbortController" in window)?new AbortController():null;
+    var t=setTimeout(function(){if(ctl)ctl.abort();rej(new Error("timeout"))},ms||15000);
+    fetch(url,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(body),signal:ctl?ctl.signal:undefined}).then(function(r){
+      if(!r.ok)throw new Error("http "+r.status);return r.json()}).then(function(j){clearTimeout(t);res(j)}).catch(function(e){clearTimeout(t);rej(e)});
+  });
+}
+async function loadFG(){
+  var j=await getJSON("https://api.alternative.me/fng/?limit=2",12000);
+  var c=j.data[0],v=parseInt(c.value,10),y=j.data[1]?parseInt(j.data[1].value,10):null;
+  var MAP={"Extreme Fear":"ترس شدید","Fear":"ترس","Neutral":"خنثی","Greed":"طمع","Extreme Greed":"طمع شدید"};
+  var col=v<25?"var(--down)":v<45?"#e7a93c":v<55?"var(--muted)":"var(--up)";
+  $("#fgBox").innerHTML='<div class="fgv"><b style="color:'+col+'">'+fa(v)+'</b><span>'+(MAP[c.value_classification]||c.value_classification)+'</span></div>'+
+   '<div class="fgbar" aria-hidden="true"><i style="left:'+v+'%"></i></div><div class="fgm"><span>ترس شدید</span><span>'+(y!==null?"دیروز: "+fa(y):"")+'</span><span>طمع شدید</span></div>';
+}
+async function loadStable(){
+  var j=await getJSON("https://stablecoins.llama.fi/stablecoincharts/all",20000);
+  var pts=j.slice(-31).map(function(r){return r.totalCirculatingUSD&&r.totalCirculatingUSD.peggedUSD}).filter(isFinite);
+  if(pts.length<8)throw new Error("short");
+  var last=pts[pts.length-1],w=pts[pts.length-8],m=pts[0];
+  var cw=(last-w)/w*100,cm=(last-m)/m*100;
+  function pill(x,t){var d=x>0.005?"up":x<-0.005?"down":"flat";return '<span class="chg '+d+'">'+t+' '+(x>0?"+":"")+x.toFixed(2)+'%</span>'}
+  $("#stBox").innerHTML='<div class="big">'+spark(pts,cw>=0?"up":"down")+'</div><div class="kv"><span>کل استیبل‌کوین‌ها</span><b>'+usd(last)+'</b></div>'+
+   '<div class="kv"><span>تغییر ۷ روز و ۳۰ روز</span><span>'+pill(cw,"۷ روز")+' '+pill(cm,"۳۰ روز")+'</span></div>'+
+   '<div class="msg">'+(cw>0.3?"نقدینگی در حال ورود است.":cw<-0.3?"نقدینگی در حال خروج است.":"جریان نقدینگی تقریباً ثابت است.")+'</div>';
+}
+async function loadOI(){
+  var syms=[["BTCUSDT","بیت‌کوین"],["ETHUSDT","اتریوم"],["SOLUSDT","سولانا"]];
+  var out=await Promise.all(syms.map(async function(s){
+    var h=await getJSON("https://fapi.binance.com/futures/data/openInterestHist?symbol="+s[0]+"&period=1h&limit=24",12000);
+    var t=await getJSON("https://fapi.binance.com/fapi/v1/ticker/24hr?symbol="+s[0],12000);
+    var o0=parseFloat(h[0].sumOpenInterestValue),o1=parseFloat(h[h.length-1].sumOpenInterestValue);
+    return {n:s[1],oi:o1,co:(o1-o0)/o0*100,cp:parseFloat(t.priceChangePercent)};
+  }));
+  $("#oiList").innerHTML=out.map(function(o){
+    var why;
+    if(Math.abs(o.co)<0.3)why="سرمایه باز تقریباً ثابت است و نشانه واضحی نیست.";
+    else if(o.cp>0&&o.co>0)why="قیمت و سرمایه باز بالا رفته‌اند، یعنی پول تازه وارد شده و روند صعودی قوی‌تر است.";
+    else if(o.cp>0)why="قیمت بالا رفته ولی سرمایه باز کم شده، یعنی بیشتر فروش‌ها بسته شده‌اند و صعود ضعیف‌تر است.";
+    else if(o.co>0)why="قیمت پایین آمده ولی سرمایه باز بالا رفته، یعنی فشار فروش تازه آمده و روند نزولی قوی‌تر است.";
+    else why="قیمت و سرمایه باز هر دو پایین آمده‌اند، یعنی بیشتر خریدها بسته شده‌اند و نزول ضعیف‌تر است.";
+    function p(x){var d=x>0.005?"up":x<-0.005?"down":"flat";return '<span class="chg '+d+'">'+(x>0?"+":"")+x.toFixed(2)+'%</span>'}
+    return '<div class="oi"><div class="h"><b>'+esc(o.n)+'</b><span class="num">'+usd(o.oi)+'</span></div><div class="x"><span>قیمت '+p(o.cp)+'</span><span>سرمایه باز '+p(o.co)+'</span></div><div class="why">'+why+'</div></div>';
+  }).join("");
+}
+async function loadFunding(){
+  var r=await Promise.all([getJSON("https://fapi.binance.com/fapi/v1/premiumIndex",15000),getJSON("https://fapi.binance.com/fapi/v1/ticker/24hr",20000)]);
+  var vol={};r[1].forEach(function(t){vol[t.symbol]=parseFloat(t.quoteVolume)});
+  var list=r[0].filter(function(x){return /USDT$/.test(x.symbol)&&vol[x.symbol]>0}).sort(function(a,b){return vol[b.symbol]-vol[a.symbol]}).slice(0,60)
+    .map(function(x){return {s:x.symbol.replace("USDT",""),f:parseFloat(x.lastFundingRate)*100}}).filter(function(x){return isFinite(x.f)});
+  list.sort(function(a,b){return b.f-a.f});
+  function rows(a,pos){return a.map(function(x){return '<div class="fnd"><span><b>'+esc(x.s)+'</b></span><span class="r" style="color:var(--'+(pos?"up":"down")+')">'+(x.f>0?"+":"")+x.f.toFixed(4)+'%</span></div>'}).join("")}
+  var hi=list.slice(0,5),lo=list.slice(-5).reverse();
+  $("#fnList").innerHTML='<div class="sub">خریداران شلوغ (ریسک ریزش)</div>'+rows(hi,true)+'<div class="sub">فروشندگان شلوغ (ریسک جهش)</div>'+rows(lo,false);
+}
 async function loadHL(){
   var btn=$("#hlBtn");btn.disabled=true;btn.textContent="در حال دریافت...";
   try{
     var j=await getJSON("https://stats-data.hyperliquid.xyz/Mainnet/leaderboard",40000);
     var rows=(j.leaderboardRows||[]).map(function(r){
       var m=(r.windowPerformances||[]).filter(function(w){return w[0]==="month"})[0];
-      return {a:r.ethAddress,n:r.displayName,v:parseFloat(r.accountValue),p:m?parseFloat(m[1].pnl):NaN,roi:m?parseFloat(m[1].roi):NaN};
+      return {a:r.ethAddress,n:r.displayName,v:parseFloat(r.accountValue),p:m?parseFloat(m[1].pnl):NaN};
     }).filter(function(r){return isFinite(r.p)&&r.a}).sort(function(a,b){return b.p-a.p}).slice(0,10);
     if(!rows.length)throw new Error("empty");
+    await Promise.all(rows.map(async function(r){
+      try{var st=await postJSON("https://api.hyperliquid.xyz/info",{type:"clearinghouseState",user:r.a},15000);
+        r.pos=(st.assetPositions||[]).map(function(x){var q=x.position;return {c:q.coin,sz:parseFloat(q.szi),val:Math.abs(parseFloat(q.positionValue)),lev:q.leverage&&q.leverage.value}}).filter(function(q){return isFinite(q.sz)&&q.sz!==0&&isFinite(q.val)}).sort(function(a,b){return b.val-a.val});
+      }catch(e){r.pos=null}
+    }));
+    var agg={};
+    rows.forEach(function(r){(r.pos||[]).forEach(function(q){var a=agg[q.c]||(agg[q.c]={l:0,s:0,n:0});if(q.sz>0)a.l+=q.val;else a.s+=q.val;a.n++})});
+    var top=Object.keys(agg).sort(function(x,y){return (agg[y].l+agg[y].s)-(agg[x].l+agg[x].s)}).slice(0,5);
+    $("#hlAgg").innerHTML=top.length?'<div class="sub" style="margin:0 0 6px">جمع موقعیت ده کیف‌پول برتر</div>'+top.map(function(c){var a=agg[c],t=a.l+a.s;
+      return '<div class="agg"><div class="t"><b>'+esc(c)+'</b><span class="num">'+usd(t)+'</span></div><div class="bar" aria-hidden="true"><i class="u" style="width:'+(a.l/t*100).toFixed(1)+'%"></i><i class="d" style="width:'+(a.s/t*100).toFixed(1)+'%"></i></div></div>'}).join(""):"";
     $("#hlList").innerHTML=rows.map(function(r,i){
       var short=r.n||(r.a.slice(0,6)+"..."+r.a.slice(-4));
-      return '<div class="lb"><span class="rk">'+fa(i+1)+'</span><a target="_blank" rel="noopener noreferrer" href="https://app.hyperliquid.xyz/explorer/address/'+esc(r.a)+'">'+esc(short)+'</a><span class="pnl" style="color:var(--up)">+'+usd(r.p)+'<small>حساب <bdi>'+usd(r.v)+'</bdi></small></span></div>';
+      var ps=r.pos===null?'<span class="msg">موقعیت‌ها دریافت نشد</span>':r.pos.length?r.pos.slice(0,6).map(function(q){return '<span class="ps '+(q.sz>0?"L":"S")+'">'+esc(q.c)+' '+(q.sz>0?"▲":"▼")+(q.lev?" ×"+q.lev:"")+' '+usd(q.val)+'</span>'}).join(""):'<span class="msg">موقعیت بازی ندارد</span>';
+      return '<div class="wal"><div class="top"><span class="rk">'+fa(i+1)+'</span><a target="_blank" rel="noopener noreferrer" href="https://app.hyperliquid.xyz/explorer/address/'+esc(r.a)+'">'+esc(short)+'</a><span class="pnl">+'+usd(r.p)+'</span></div><div class="pos">'+ps+'</div></div>';
     }).join("");
     btn.textContent="به‌روزرسانی";btn.classList.add("ghost");hlDone=true;
   }catch(e){
@@ -691,10 +816,13 @@ async function loadHL(){
 }
 async function loadSmart(){
   if(smBusy)return;smBusy=true;
-  var r=await Promise.allSettled([loadBinance(),loadLlama()]);
-  if(r[0].status==="rejected")$("#bnList").innerHTML='<div class="msg">اتصال به بایننس برقرار نشد. اگر VPN خاموش است روشن کن.</div>';
-  if(r[1].status==="rejected")$("#dlList").innerHTML='<div class="msg">اتصال به دیفی لاما برقرار نشد.</div>';
-  var ok=r[0].status==="fulfilled"||r[1].status==="fulfilled";
+  var jobs=[[loadBinance,"#bnList","بایننس"],[loadOI,"#oiList","بایننس"],[loadFunding,"#fnList","بایننس"],[loadFG,"#fgBox","منبع ترس و طمع"],[loadStable,"#stBox","دیفی لاما"],[loadLlama,"#dlList","دیفی لاما"]];
+  var r=await Promise.allSettled(jobs.map(function(j){return j[0]()}));
+  var ok=false;
+  r.forEach(function(x,i){
+    if(x.status==="fulfilled")ok=true;
+    else $(jobs[i][1]).innerHTML='<div class="msg">اتصال به '+jobs[i][2]+' برقرار نشد.'+(jobs[i][2]==="بایننس"?" اگر VPN خاموش است روشن کن.":"")+'</div>';
+  });
   $("#smDot").classList.toggle("off",!ok);
   $("#smTxt").textContent=ok?"به‌روز شد "+new Date().toLocaleTimeString("fa-IR",{hour:"2-digit",minute:"2-digit"}):"اتصال به منابع برقرار نیست";
   smAt=Date.now();smBusy=false;

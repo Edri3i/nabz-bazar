@@ -437,7 +437,7 @@ function normalize(rows,wk){
     var ts=new Date(r.date);if(isNaN(ts))return;
     var c=classify(r.title,r.impact);
     out.push({id:(r.wk||wk)+"-"+i,title:r.title,cur:String(r.country||"").toUpperCase(),ts:ts,impact:r.impact,
-      fc:r.forecast||"",pv:r.previous||"",wk:r.wk||wk,c:c});
+      fc:r.forecast||"",pv:r.previous||"",ac:r.actual||"",wk:r.wk||wk,c:c});
   });
   return out;
 }
@@ -552,6 +552,29 @@ function trend(it){
   var d=f>p?1:(f<p?-1:0);
   return {d:d,better:d===0?0:d*(it.c.inv?-1:1)};
 }
+
+function actVerdict(it){
+  var a=pnum(it.ac),f=pnum(it.fc);
+  if(a==null||f==null)return null;
+  var d=a>f?1:(a<f?-1:0);
+  return {d:d,better:d===0?0:d*(it.c.inv?-1:1)};
+}
+var MOVE_API="https://market-reaction-bot.ali-alasmia77.workers.dev",MV={};
+var MV_NAMES={XAUUSD:"طلا",EURUSD:"یورو/دلار",WTI:"نفت",BTC:"بیت‌کوین"};
+function mvHtml(m){
+  if(!m)return '<p class="fine">در حال محاسبه حرکت واقعی...</p>';
+  if(m.error||!Object.keys(m.items||{}).length)return '<p class="fine">داده قیمت برای این زمان در دسترس نیست.</p>';
+  function chip(v){if(v==null||!isFinite(v))return '<span class="num">-</span>';var c=v>0.005?"up":v<-0.005?"down":"";return '<b class="num" style="color:var(--'+(v>0.005?"up":v<-0.005?"down":"fg-dim")+',#c4421a)">'+(v>0?"+":"")+v.toFixed(2)+'%</b>'}
+  var rows=Object.keys(MV_NAMES).filter(function(k){return m.items[k]}).map(function(k){var x=m.items[k];return '<div class="arow" style="display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-top:1px solid var(--line)"><span>'+MV_NAMES[k]+'</span><span>۳۰ دقیقه: '+chip(x.m30)+' &nbsp; ۶۰ دقیقه: '+chip(x.m60)+'</span></div>'}).join("");
+  return rows+'<p class="fine">تغییر قیمت از لحظه انتشار خبر. این عدد حرکت واقعی بازار است و همه‌اش به خاطر همین خبر نیست.</p>';
+}
+function loadMove(it){
+  var key=String(it.ts.getTime());
+  if(MV[key]!==undefined){var e=document.getElementById("mv");if(e)e.innerHTML=mvHtml(MV[key]);return}
+  fetch(MOVE_API+"/move?t="+Math.floor(it.ts.getTime()/1000)).then(function(r){return r.json()}).then(function(j){MV[key]=j}).catch(function(){MV[key]={error:1}}).then(function(){
+    var e=document.getElementById("mv");if(e&&S.openId===it.id)e.innerHTML=mvHtml(MV[key]);
+  });
+}
 function renderList(){
   var v=visible(),now=Date.now(),today=dayKey(new Date()),html="",lastDay="";
   if(!v.length){
@@ -570,7 +593,7 @@ function renderList(){
       '<span class="t"><b class="num">'+timeFa(it.ts)+'</b><span class="cur">'+esc(it.cur)+'</span></span>'+
       '<div><h3>'+esc(title(it))+'<span class="tag">'+(it.impact==="High"?"قرمز":"نارنجی")+'</span>'+(it.alt?'<span class="tag alt">برنامه جایگزین</span>':'')+'<small>'+esc(it.title)+'</small></h3>'+
       '<p>'+esc(it.c.d)+'</p>'+
-      '<div class="meta"><span>پیش‌بینی: <b class="num">'+esc(it.fc||"-")+'</b></span><span>قبلی: <b class="num">'+esc(it.pv||"-")+'</b></span>'+(function(){var t=trend(it);return t?'<span>پیش‌بینی نسبت به قبلی: <b>'+(t.d>0?"▲ بالاتر":t.d<0?"▼ پایین‌تر":"برابر")+'</b></span>':""})()+(past?'<span>منتشر شده</span>':'')+'<span class="more">'+(op?"بستن ▴":"جزئیات و اثر روی بازار ▾")+'</span></div></div></button>'+(op?'<div class="det" id="det">'+detailHTML(it)+'</div>':'')+'</div>';
+      '<div class="meta"><span>پیش‌بینی: <b class="num">'+esc(it.fc||"-")+'</b></span><span>قبلی: <b class="num">'+esc(it.pv||"-")+'</b></span>'+(it.ac?'<span>عدد واقعی: <b class="num">'+esc(it.ac)+'</b>'+(function(){var v=actVerdict(it);return v&&v.d!==0?(v.better>0?' <b style="color:var(--up)">بهتر از انتظار</b>':' <b style="color:#c4421a">بدتر از انتظار</b>'):(v?' <b>مطابق انتظار</b>':"")})()+'</span>':"")+(function(){var t=trend(it);return t?'<span>پیش‌بینی نسبت به قبلی: <b>'+(t.d>0?"▲ بالاتر":t.d<0?"▼ پایین‌تر":"برابر")+'</b></span>':""})()+(past?'<span>منتشر شده</span>':'')+'<span class="more">'+(op?"بستن ▴":"جزئیات و اثر روی بازار ▾")+'</span></div></div></button>'+(op?'<div class="det" id="det">'+detailHTML(it)+'</div>':'')+'</div>';
   });
   $("#list").innerHTML=html+"</div>";
 }
@@ -634,7 +657,7 @@ function detailHTML(it){
   }else if(c.k!=="data"){
     exp="این رویداد عدد مشخصی ندارد. واکنش به تفاوت لحن و پیام با انتظار بازار بستگی دارد.";
   }
-  return '<div class="sh-sec"><div class="kv"><div><small>زمان (تهران)</small><b class="num">'+timeFa(it.ts)+'</b></div><div><small>پیش‌بینی</small><b class="num">'+esc(it.fc||"-")+'</b></div><div><small>قبلی</small><b class="num">'+esc(it.pv||"-")+'</b></div></div></div>'+
+  return '<div class="sh-sec"><div class="kv"><div><small>زمان (تهران)</small><b class="num">'+timeFa(it.ts)+'</b></div><div><small>پیش‌بینی</small><b class="num">'+esc(it.fc||"-")+'</b></div><div><small>قبلی</small><b class="num">'+esc(it.pv||"-")+'</b></div>'+(it.ac?'<div><small>واقعی</small><b class="num">'+esc(it.ac)+'</b></div>':"")+'</div></div>'+(it.ts.getTime()<Date.now()-9e5&&it.ts.getTime()>Date.now()-4*864e5&&!it.alt?'<div class="sh-sec"><h4>حرکت واقعی بازار بعد از خبر</h4><div id="mv">'+mvHtml(MV[String(it.ts.getTime())])+'</div></div>':"")+
    prio+(exp?'<div class="sh-sec"><div class="callout">'+esc(exp)+'</div></div>':'')+
    '<div class="sh-sec"><h4>سابقه واکنش بازار</h4><p>'+esc(c.h)+'</p></div>'+
    '<div class="sh-sec"><h4>اگر نتیجه این‌طور باشد</h4><div class="sc" role="group"><button type="button" data-sc="beat" aria-pressed="'+(S.sc==="beat")+'">'+lb[0]+'</button><button type="button" data-sc="miss" aria-pressed="'+(S.sc==="miss")+'">'+lb[1]+'</button></div></div>'+
@@ -652,7 +675,8 @@ function openEvent(id,forceOpen){
   S.openId=(S.openId===id&&!forceOpen)?null:id;
   if(S.openId)S.sc="beat";
   renderList();
-  if(S.openId){var el=$('.ev[data-id="'+S.openId+'"]');if(el)el.scrollIntoView({behavior:"smooth",block:"start"})}
+  if(S.openId){var el=$('.ev[data-id="'+S.openId+'"]');if(el)el.scrollIntoView({behavior:"smooth",block:"start"});
+    var oi=findItem(S.openId);if(oi&&oi.ts.getTime()<Date.now()-9e5&&oi.ts.getTime()>Date.now()-4*864e5&&!oi.alt)loadMove(oi)}
 }
 $("#list").addEventListener("click",function(e){
   var sc=e.target.closest("[data-sc]");

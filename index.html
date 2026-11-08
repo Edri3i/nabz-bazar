@@ -4,6 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#12112b">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
 <title>نبض بازار</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -221,6 +226,57 @@ button{cursor:pointer}
 .agg .t{display:flex;justify-content:space-between;font-size:13px}
 .agg .bar{height:9px}
 
+
+/* ---------- stars, summary, movers, converter, search ---------- */
+.star{position:absolute;top:5px;inset-inline-start:5px;z-index:2;width:22px;height:22px;border-radius:50%;border:0;background:var(--surface);color:var(--muted);display:grid;place-items:center;font-size:13px;line-height:1;padding:0;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.star.on{color:#e7a93c}
+.star:active{transform:scale(.88)}
+.sumbar{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:9px 10px;box-shadow:var(--shadow);display:grid;gap:1px;min-width:0}
+.tile small{color:var(--muted);font-size:11px}
+.tile b{font-size:15px;font-variant-numeric:tabular-nums;direction:ltr;text-align:right;white-space:nowrap}
+.tile .chg{justify-self:start}
+.subh{margin:2px 6px 0;font-size:13px;font-weight:700;color:var(--accent)}
+.conv{display:grid;gap:8px}
+.conv .r{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
+.conv input,.conv select,.fld input,.fld select{width:100%;border:1px solid var(--line);background:var(--surface2);color:var(--fg);border-radius:12px;padding:9px 12px;direction:ltr;font-size:15px}
+.conv select,.fld select{direction:rtl}
+.conv .out{font-size:20px;font-weight:900;direction:ltr;text-align:right;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.conv .out small{display:block;font-size:12px;font-weight:500;color:var(--muted)}
+.swap{justify-self:center;border:1px solid var(--line);background:var(--surface2);color:var(--accent);border-radius:999px;padding:2px 16px;font-weight:700}
+#srch{position:fixed;inset:0;z-index:60;background:rgba(18,17,43,.55);backdrop-filter:blur(4px);display:none;align-items:flex-start;justify-content:center;padding:calc(14px + env(safe-area-inset-top,0px)) 14px 14px}
+#srch.on{display:flex}
+#srch .box{width:100%;max-width:560px;background:var(--surface);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow-lg);overflow:hidden}
+#srch input{width:100%;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--fg);padding:16px 18px;font-size:16px;outline:none}
+#srch .res{max-height:60vh;overflow:auto}
+#srch .it{display:flex;justify-content:space-between;gap:10px;width:100%;border:0;background:transparent;padding:11px 18px;text-align:right;border-bottom:1px solid var(--line);font-size:14px}
+#srch .it:hover,#srch .it:focus{background:var(--accent-soft)}
+#srch .it small{color:var(--muted)}
+#srch .em{padding:18px;color:var(--muted);font-size:13px}
+.hl{animation:hlp 1.6s ease-out}
+@keyframes hlp{0%,40%{box-shadow:0 0 0 3px var(--accent),0 0 24px var(--accent)}100%{box-shadow:var(--shadow)}}
+#hist{position:fixed;inset:0;z-index:60;background:rgba(18,17,43,.55);backdrop-filter:blur(4px);display:none;align-items:flex-end;justify-content:center}
+#hist.on{display:flex}
+#hist .sheet{width:100%;max-width:680px;background:var(--surface);border:1px solid var(--line);border-radius:26px 26px 0 0;padding:16px 18px calc(18px + env(safe-area-inset-bottom,0px));display:grid;gap:10px;box-shadow:var(--shadow-lg)}
+#hist h3{margin:0;font-size:16px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+#hist .x{border:1px solid var(--line);background:var(--surface2);border-radius:999px;width:32px;height:32px;color:var(--fg)}
+#hist svg.ch{width:100%;height:190px;display:block;direction:ltr}
+.rng{display:flex;gap:6px;flex-wrap:wrap}
+.rng button{border:1px solid var(--line);background:var(--surface2);border-radius:999px;padding:3px 14px;font-size:12.5px}
+.rng button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:transparent;font-weight:700}
+.irow{cursor:pointer;position:relative}
+.irow .star{top:50%;transform:translateY(-50%);inset-inline-start:-2px;position:static;transform:none;margin-inline-start:6px}
+.irow .nmw{display:flex;align-items:center;gap:6px}
+.fld{display:grid;gap:4px;font-size:12.5px;color:var(--muted)}
+.calc{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.bub{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:4px 10px;font-size:12.5px;align-items:center;padding:6px 0;border-top:1px solid var(--line)}
+.bub:first-of-type{border-top:0}
+.kv2{display:flex;justify-content:space-between;gap:8px;font-size:13px;padding:6px 0;border-top:1px solid var(--line);align-items:baseline}
+.kv2:first-of-type{border-top:0}
+.kv2 b{direction:ltr;font-variant-numeric:tabular-nums}
+.bigusd .star{background:rgba(255,255,255,.25);color:#fff}
+.bigusd .star.on{color:#ffd76a}
+
 /* ---------- tool tabs ---------- */
 .panel{display:none}
 .panel.on{display:block}
@@ -259,6 +315,7 @@ nav button[aria-selected="true"]{background:var(--accent-soft);color:var(--accen
           <p>قیمت زنده ارز، طلا، نقره، نفت و ارزهای دیجیتال</p>
         </div>
         <div class="tools">
+          <button type="button" class="pill-btn" id="installBtn" hidden aria-label="نصب روی گوشی"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg></button><button type="button" class="pill-btn searchBtn" aria-label="جستجو"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button>
           <button type="button" class="pill-btn themeBtn" aria-label="تغییر حالت روز و شب"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button>
           <div class="ring">
             <svg viewBox="0 0 42 42" aria-hidden="true"><circle class="tr" cx="21" cy="21" r="19" fill="none" stroke-width="3"/><circle class="pg" id="pg" cx="21" cy="21" r="19" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="119.4" stroke-dashoffset="119.4"/></svg>
@@ -274,6 +331,8 @@ nav button[aria-selected="true"]{background:var(--accent-soft);color:var(--accen
       </svg>
       <div class="live"><span class="dot" id="liveDot"></span><span id="liveTxt">در حال دریافت قیمت‌ها...</span></div>
     </header>
+
+    <div class="sumbar" id="sumbar" aria-label="خلاصه بازار"><div class="tile"><small>سلطه بیت‌کوین</small><b>—</b></div><div class="tile"><small>ارزش کل کریپتو</small><b>—</b></div><div class="tile"><small>شاخص دلار</small><b>—</b></div></div>
 
     <section class="mood" aria-label="حال بازار">
       <div class="mood-top"><span>حال بازار در ۲۴ ساعت گذشته</span><b id="moodWord">...</b></div>
@@ -296,6 +355,16 @@ nav button[aria-selected="true"]{background:var(--accent-soft);color:var(--accen
     </div>
 
     <div id="board" class="sec" style="gap:14px"></div>
+
+    <section class="card" aria-label="ماشین‌حساب تبدیل">
+      <h2>ماشین‌حساب تبدیل</h2>
+      <div class="conv">
+        <input id="cvAmt" type="number" inputmode="decimal" value="100" aria-label="مقدار">
+        <div class="r"><select id="cvFrom" aria-label="از"></select><select id="cvTo" aria-label="به"></select></div>
+        <button type="button" class="swap" id="cvSwap">جابه‌جایی ⇅</button>
+        <div class="out" id="cvOut">—</div>
+      </div>
+    </section>
     <div class="foot">داده‌ها تقریبی و برای اطلاع هستند و توصیه معاملاتی نیستند.</div>
   </div>
 </main>
@@ -309,17 +378,30 @@ nav button[aria-selected="true"]{background:var(--accent-soft);color:var(--accen
           <h1>داخلی</h1>
           <p>قیمت ارز، طلا و سکه در بازار ایران به تومان</p>
         </div>
-        <div class="tools"><button type="button" class="pill-btn themeBtn" aria-label="تغییر حالت روز و شب"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button><button type="button" class="pill-btn" id="irRefresh" aria-label="به‌روزرسانی">
+        <div class="tools"><button type="button" class="pill-btn searchBtn" aria-label="جستجو"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button><button type="button" class="pill-btn themeBtn" aria-label="تغییر حالت روز و شب"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button><button type="button" class="pill-btn" id="irRefresh" aria-label="به‌روزرسانی">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg></button></div>
       </div>
       <div class="live"><span class="dot" id="irDot"></span><span id="irTxt">در حال دریافت...</span></div>
     </header>
-    <div class="bigusd" id="irUsd"><small>دلار آمریکا</small><div class="v">—</div></div>
+    <div class="bigusd" id="irUsd" role="button" tabindex="0"><small>دلار آمریکا</small><div class="v">—</div></div>
+    <section class="card" id="irStarCard" aria-label="ستاره‌دارهای داخلی" hidden><h2>★ ستاره‌دارها <small>تومان</small></h2><div id="irStar"></div></section>
     <section class="card" aria-label="ارزها"><h2>ارزها <small>تومان</small></h2><div id="irFx"></div></section>
     <section class="card" aria-label="طلا"><h2>طلا <small>تومان</small></h2><div id="irGold"></div></section>
     <section class="card" aria-label="سکه"><h2>سکه <small>تومان</small></h2><div id="irCoin"></div></section>
+    <section class="card" aria-label="ماشین‌حساب طلا و سکه"><h2>ماشین‌حساب طلا و سکه</h2>
+      <div class="calc">
+        <label class="fld">نوع<select id="clType"><option value="gold">طلا (گرم)</option><option value="coin_emami">سکه امامی</option><option value="coin_bahar">سکه بهار آزادی</option><option value="coin_half">نیم‌سکه</option><option value="coin_quarter">ربع‌سکه</option><option value="coin_gram">سکه گرمی</option></select></label>
+        <label class="fld" id="clKw">عیار<select id="clK"><option>24</option><option>22</option><option>21</option><option>20</option><option selected>18</option><option>14</option></select></label>
+        <label class="fld" style="grid-column:1/-1"><span id="clU">وزن به گرم</span><input id="clQ" type="number" inputmode="decimal" value="1" min="0"></label>
+      </div>
+      <div class="conv"><div class="out" id="clOut">—</div></div>
+    </section>
+    <section class="card" aria-label="حباب سکه"><h2>حباب سکه <small>تقریبی</small></h2>
+      <p class="d">حباب یعنی سکه چقدر گران‌تر از ارزش طلای داخل خودش معامله می‌شود. وزن و عیار سکه‌ها ۹۰۰ در نظر گرفته شده و عدد تقریبی است.</p>
+      <div id="irBub"></div></section>
+    <section class="card" aria-label="دلار و طلا"><h2>دلار و طلا</h2><div id="irRatio"></div></section>
     <section class="card" aria-label="جهانی"><h2>بازار جهانی <small>دلار</small></h2><div id="irWorld"></div></section>
-    <div class="foot">قیمت‌ها تقریبی هستند و ممکن است با قیمت لحظه‌ای بازار تفاوت داشته باشند. عیارهای ۲۰، ۲۱، ۲۲، ۲۴ و ۱۴ از روی ۱۸ عیار محاسبه می‌شوند.</div>
+    <div class="foot">قیمت‌ها تقریبی هستند و ممکن است با قیمت لحظه‌ای بازار تفاوت داشته باشند. عیارهای ۲۰، ۲۱، ۲۲، ۲۴ و ۱۴ از روی ۱۸ عیار محاسبه می‌شوند. روی هر قیمت بزن تا نمودارش باز شود.</div>
   </div>
 </main>
 
@@ -328,7 +410,7 @@ nav button[aria-selected="true"]{background:var(--accent-soft);color:var(--accen
     <header class="hero">
       <div class="hero-top"><div><div class="by">Written by Ali Edrisi</div>
       <h1>پول هوشمند</h1>
-      <p>رفتار معامله‌گران بزرگ و جریان پول در بازار</p></div><div class="tools"><button type="button" class="pill-btn themeBtn" aria-label="تغییر حالت روز و شب"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button></div></div>
+      <p>رفتار معامله‌گران بزرگ و جریان پول در بازار</p></div><div class="tools"><button type="button" class="pill-btn searchBtn" aria-label="جستجو"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button><button type="button" class="pill-btn themeBtn" aria-label="تغییر حالت روز و شب"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button></div></div>
       <div class="live"><span class="dot" id="smDot"></span><span id="smTxt">در حال دریافت...</span></div>
     </header>
 
@@ -392,6 +474,9 @@ nav button[aria-selected="true"]{background:var(--accent-soft);color:var(--accen
   <div class="fbar"><b>اسکنر RSI</b><button type="button" class="pill-btn themeBtn" style="width:34px;height:34px;padding:0" aria-label="تغییر حالت روز و شب"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button><button type="button" data-reload="rsi">بارگذاری مجدد</button><a id="open-rsi" target="_blank" rel="noopener" href="#">باز کردن جدا</a></div>
   <div class="fwrap"><iframe id="if-rsi" title="اسکنر RSI" referrerpolicy="no-referrer"></iframe><div class="floading" id="ld-rsi"><span>در حال باز کردن...</span><span id="hint-rsi" hidden>اگر باز نشد، «باز کردن جدا» را بزن.</span></div></div>
 </section>
+
+<div id="hist" role="dialog" aria-modal="true" aria-label="نمودار قیمت"><div class="sheet"><h3><span id="hTitle">—</span><button type="button" class="x" id="hClose" aria-label="بستن">✕</button></h3><div id="hVal" class="kv2" style="border:0;padding:0"></div><div class="rng" id="hRng"><button type="button" data-n="7" aria-pressed="false">۷ روز</button><button type="button" data-n="30" aria-pressed="true">۳۰ روز</button><button type="button" data-n="90" aria-pressed="false">۹۰ روز</button><button type="button" data-n="365" aria-pressed="false">یک سال</button><button type="button" data-n="0" aria-pressed="false">همه</button></div><div id="hChart"></div></div></div>
+<div id="srch" role="dialog" aria-modal="true" aria-label="جستجو"><div class="box"><input id="srchIn" type="search" placeholder="جستجوی ارز، طلا، سکه یا بخش..." autocomplete="off" aria-label="جستجو"><div class="res" id="srchRes"></div></div></div>
 
 <nav aria-label="بخش‌ها"><div class="in" role="tablist">
   <button type="button" role="tab" data-tab="pulse" aria-selected="true">
@@ -463,6 +548,8 @@ var FA_NAMES={bitcoin:"بیت‌کوین",ethereum:"اتریوم",binancecoin:"�
   litecoin:"لایت‌کوین",polkadot:"پولکادات","bitcoin-cash":"بیت‌کوین کش",uniswap:"یونی‌سواپ",near:"نیر",aptos:"اپتوس",pepe:"پپه","hedera-hashgraph":"هدرا"};
 var SKIP={usdt:1,usdc:1,dai:1,usde:1,fdusd:1,tusd:1,usds:1,busd:1,pyusd:1,usd1:1,usdd:1,usdtb:1,susds:1,susde:1,steth:1,wsteth:1,wbtc:1,weth:1,weeth:1,cbbtc:1,"bsc-usd":1,usdt0:1,usdg:1,bfusd:1,buidl:1,figr_heloc:1,jitosol:1,reth:1,ezeth:1,rseth:1,solvbtc:1,wbeth:1,wbnb:1,paxg:1,xaut:1};
 
+var stars=[];try{stars=JSON.parse(ls("np_stars")||"[]")||[]}catch(e){stars=[]}
+var pinned=null;
 var D={};   /* id -> data */
 var meta={}; /* id -> static info */
 FX.forEach(function(a){meta[a.id]=a});
@@ -524,7 +611,8 @@ function rowHtml(m,i,first){
   var pill=chg===null?"":'<span class="chg '+dir+'">'+(dir==="up"?"▲ +":dir==="down"?"▼ ":"")+Math.abs(chg).toFixed(2)+'%</span>';
   var tag=has&&d.approx?'<span class="tag">تقریبی</span>':"";
   var fl=d&&d.flash?" flash-"+d.flash:"";
-  return '<div class="'+cls+fl+'" data-id="'+esc(m.id)+'" style="--i:'+i+'">'+logoHtml(m)+
+  var sOn=stars.indexOf(m.id)>=0;
+  return '<div class="'+cls+fl+'" data-id="'+esc(m.id)+'" style="--i:'+i+'"><button type="button" class="star'+(sOn?" on":"")+'" data-star="'+esc(m.id)+'" aria-label="ستاره‌دار" aria-pressed="'+sOn+'">'+(sOn?"★":"☆")+'</button>'+logoHtml(m)+
     '<div class="nm"><b>'+esc(m.name)+tag+'</b><small>'+esc(m.sym)+'</small></div>'+
     (has?spark(d.points,dir):spark(null,"flat"))+
     '<div class="pr"><span class="p">'+price+'</span>'+pill+'</div></div>';
@@ -551,6 +639,13 @@ function statusFor(key){
 }
 function render(){
   var board=$("#board"),html="";
+  var sd=stars.filter(function(id){return meta[id]&&D[id]&&isFinite(D[id].price)});
+  if(sd.length&&filter==="all"){
+    html+='<section class="sec" aria-label="ستاره‌دارها"><div class="sec-h"><h2>★ ستاره‌دارها</h2></div>'+sd.map(function(id,i){return rowHtml(meta[id],i,false)}).join("")+"</section>";
+  }
+  if(pinned&&meta[pinned]&&D[pinned]){
+    html+='<section class="sec" aria-label="نتیجه جستجو"><div class="sec-h"><h2>نتیجه جستجو</h2></div>'+rowHtml(meta[pinned],0,false)+"</section>";
+  }
   SECS.forEach(function(s){
     if(filter!=="all"&&filter!==s.k)return;
     var items=s.k==="crypto"?crypto10:FX.filter(function(a){return a.sec===s.k});
@@ -560,12 +655,80 @@ function render(){
     else items.forEach(function(m,i){html+=rowHtml(m,i,true)});
     html+="</section>";
   });
+  if((filter==="all"||filter==="crypto")&&cryptoAll.length>20){
+    var mv=cryptoAll.filter(function(m){return D[m.id]&&isFinite(D[m.id].change)}).sort(function(a,b){return D[b.id].change-D[a.id].change});
+    var up=mv.slice(0,5),dn=mv.slice(-5).reverse();
+    html+='<section class="sec" aria-label="بیشترین تغییر"><div class="sec-h"><h2>بیشترین صعود و نزول</h2><span class="st"><i></i>۱۰۰ ارز برتر</span></div><div class="subh">صعودی‌ترین‌ها</div>'+
+      up.map(function(m,i){return rowHtml(m,i,false)}).join("")+'<div class="subh">نزولی‌ترین‌ها</div>'+dn.map(function(m,i){return rowHtml(m,i,false)}).join("")+"</section>";
+  }
   board.innerHTML=html;
-  var all=FX.concat(crypto10);
+  var all=FX.concat(cryptoAll);
   all.forEach(function(m){if(D[m.id]&&isFinite(D[m.id].price))entered[m.id]=1;if(D[m.id])D[m.id].flash=""});
   $("#setup").hidden=!!workerUrl();
-  mood();
+  mood();summary();convBuild();
 }
+function summary(){
+  var t=$$("#sumbar .tile");if(t.length<3)return;
+  function pill(x){if(x==null||!isFinite(x))return "";var d=x>0.005?"up":x<-0.005?"down":"flat";return '<span class="chg '+d+'">'+(x>0?"+":"")+x.toFixed(2)+'%</span>'}
+  if(cgGlobal){
+    t[0].innerHTML='<small>سلطه بیت‌کوین</small><b>'+cgGlobal.market_cap_percentage.btc.toFixed(1)+'%</b>';
+    var tc=cgGlobal.total_market_cap.usd;
+    t[1].innerHTML='<small>ارزش کل کریپتو</small><b>$'+(tc/1e12).toFixed(2)+'T</b>'+pill(cgGlobal.market_cap_change_percentage_24h_usd);
+  }
+  var dx=D.DXY;
+  if(dx&&isFinite(dx.price))t[2].innerHTML='<small>شاخص دلار</small><b>'+dx.price.toFixed(2)+'</b>'+pill(dx.change);
+}
+/* converter */
+var CV_FX=[["USD","دلار آمریکا"],["EUR","یورو"],["GBP","پوند"],["CHF","فرانک سوئیس"],["CAD","دلار کانادا"],["NZD","دلار نیوزیلند"],["IRT","تومان"],["XAU","طلا (اونس)"],["XAG","نقره (اونس)"]];
+function usdOf(c){
+  var g=function(id){return D[id]&&isFinite(D[id].price)?D[id].price:null};
+  var v;
+  switch(c){
+    case "USD":return 1;
+    case "EUR":return g("EURUSD");
+    case "GBP":return g("GBPUSD");
+    case "CHF":v=g("USDCHF");return v?1/v:null;
+    case "CAD":v=g("USDCAD");return v?1/v:null;
+    case "NZD":return g("NZDUSD");
+    case "IRT":v=(irData&&irData.usd)||irUsdQuick;return v?1/v:null;
+    case "XAU":return g("XAUUSD");
+    case "XAG":return g("XAGUSD");
+  }
+  var m=cryptoAll.filter(function(x){return x.code===c})[0];
+  return m?g(m.id):null;
+}
+function convBuild(){
+  var a=$("#cvFrom"),b=$("#cvTo");if(!a||!b)return;
+  var opts=CV_FX.concat(cryptoAll.slice(0,40).map(function(m){return [m.code,m.name+" ("+m.code+")"]}));
+  var key=opts.length+"|"+(irUsdQuick||(irData&&irData.usd)||0);
+  if(a.getAttribute("data-k")===key)return;
+  var fa0=a.value||"USD",tb0=b.value||(ls("np_cvTo")||"IRT");
+  var h=opts.map(function(o){return '<option value="'+esc(o[0])+'">'+esc(o[1])+'</option>'}).join("");
+  a.innerHTML=h;b.innerHTML=h;a.value=fa0;b.value=tb0;
+  if(a.value!==fa0)a.value="USD";if(b.value!==tb0)b.value="USD";
+  a.setAttribute("data-k",key);b.setAttribute("data-k",key);convCalc();
+}
+function convCalc(){
+  var amt=parseFloat($("#cvAmt").value),f=$("#cvFrom").value,t=$("#cvTo").value,out=$("#cvOut");
+  if(!isFinite(amt)){out.textContent="—";return}
+  var uf=usdOf(f),ut=usdOf(t);
+  if(!uf||!ut){out.innerHTML='—<small>قیمت این مورد هنوز دریافت نشده</small>';return}
+  var r=amt*uf/ut;
+  var dec=r>=1000?0:r>=1?2:r>=0.01?4:8;
+  var one=uf/ut;
+  out.innerHTML=r.toLocaleString("en-US",{maximumFractionDigits:dec})+' '+esc(t)+'<small>هر ۱ '+esc(f)+' = '+one.toLocaleString("en-US",{maximumFractionDigits:one>=1?2:6})+' '+esc(t)+'</small>';
+}
+["#cvAmt","#cvFrom","#cvTo"].forEach(function(q){$(q).addEventListener("input",function(){ls("np_cvTo",$("#cvTo").value);convCalc()})});
+$("#cvSwap").addEventListener("click",function(){var a=$("#cvFrom"),b=$("#cvTo"),x=a.value;a.value=b.value;b.value=x;convCalc()});
+document.addEventListener("click",function(e){
+  var st=e.target.closest&&e.target.closest("[data-star]");
+  if(!st)return;
+  e.stopPropagation();
+  var id=st.getAttribute("data-star"),i=stars.indexOf(id);
+  if(i>=0)stars.splice(i,1);else stars.push(id);
+  ls("np_stars",JSON.stringify(stars));
+  render();
+},true);
 function mood(){
   var up=0,dn=0;
   FX.concat(crypto10).forEach(function(m){var d=D[m.id];if(d&&isFinite(d.change)){if(d.change>0.005)up++;else if(d.change<-0.005)dn++}});
@@ -596,20 +759,30 @@ function setData(id,price,change,pts,extra){
   if(old&&isFinite(old.price)&&isFinite(price)&&old.price!==price)nd.flash=price>old.price?"up":"down";
   D[id]=nd;
 }
+var cryptoAll=[],cgGlobal=null;
 async function loadCrypto(){
-  var j=await getJSON("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=30&page=1&sparkline=true&price_change_percentage=24h");
+  var j=await getJSON("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=true&price_change_percentage=24h");
   var list=[];
-  for(var i=0;i<j.length&&list.length<10;i++){
+  for(var i=0;i<j.length;i++){
     var c=j[i];if(SKIP[(c.symbol||"").toLowerCase()]||SKIP[c.id])continue;
     var sp=c.sparkline_in_7d&&c.sparkline_in_7d.price||[];
     var pts=sp.slice(-24);
     var ch=c.price_change_percentage_24h_in_currency!=null?c.price_change_percentage_24h_in_currency:c.price_change_percentage_24h;
-    var m={id:"cg:"+c.id,sec:"crypto",name:FA_NAMES[c.id]||c.name,sym:String(c.symbol||"").toUpperCase()+"/USD",dec:cryptoDec(c.current_price),img:c.image};
-    list.push(m);
+    var m={id:"cg:"+c.id,sec:"crypto",name:FA_NAMES[c.id]||c.name,en:c.name,code:String(c.symbol||"").toUpperCase(),sym:String(c.symbol||"").toUpperCase()+"/USD",dec:cryptoDec(c.current_price),img:c.image};
+    list.push(m);meta[m.id]=m;
     setData(m.id,c.current_price,ch,pts,{t:Date.now()});
   }
-  crypto10=list;
+  cryptoAll=list;crypto10=list.slice(0,10);
   health.cg={ok:true,t:Date.now()};
+}
+async function loadGlobal(){
+  var j=await getJSON("https://api.coingecko.com/api/v3/global",12000);
+  cgGlobal=j&&j.data;
+}
+var irUsdQuick=0;
+async function loadIrUsd(){
+  var base=workerUrl();if(!base)return;
+  var j=await getJSON(base+"/iran",12000);if(j&&isFinite(j.usd))irUsdQuick=j.usd;
 }
 async function loadWorker(){
   var base=workerUrl();
@@ -620,6 +793,7 @@ async function loadWorker(){
     var it=items[m.id];
     if(it&&isFinite(it.price)){setData(m.id,it.price,it.change,it.points,{t:(it.t||0)*1000});n++}
   });
+  if(items.DXY&&isFinite(items.DXY.price))setData("DXY",items.DXY.price,items.DXY.change,items.DXY.points,{t:(items.DXY.t||0)*1000});
   if(!n)throw new Error("empty");
   health.wk={ok:true,t:Date.now(),why:""};
 }
@@ -636,6 +810,7 @@ async function tick(manual){
   if(busy)return;busy=true;
   var cgBackoff=false;
   var r=await Promise.allSettled([loadCrypto(),loadWorker()]);
+  Promise.allSettled([loadGlobal(),loadIrUsd()]).then(function(){summary();convBuild()});
   if(r[0].status==="rejected"){
     health.cg.ok=crypto10.length?false:false;
     if(r[0].reason&&r[0].reason.status===429)cgBackoff=true;
@@ -834,7 +1009,8 @@ renderLinks();
 var IR_SRC=["https://itsyebekhe.github.io/nabz/market.json","https://raw.githubusercontent.com/itsyebekhe/nabz/main/market.json","https://cdn.jsdelivr.net/gh/itsyebekhe/nabz@main/market.json"];
 var IR_FX=[["usd","دلار آمریکا","🇺🇸",1],["eur","یورو","🇪🇺",1],["gbp","پوند انگلیس","🇬🇧",1],["aed","درهم امارات","🇦🇪",1],["try","لیر ترکیه","🇹🇷",1],["cad","دلار کانادا","🇨🇦",1],["aud","دلار استرالیا","🇦🇺",1],["cny","یوان چین","🇨🇳",1],["chf","فرانک سوئیس","🇨🇭",1],["sar","ریال عربستان","🇸🇦",1],["qar","ریال قطر","🇶🇦",1],["kwd","دینار کویت","🇰🇼",1],["rub","روبل روسیه","🇷🇺",1],["jpy","ین ژاپن","🇯🇵",100]];
 var IR_COIN=[["coin_emami","سکه امامی"],["coin_bahar","سکه بهار آزادی"],["coin_half","نیم‌سکه"],["coin_quarter","ربع‌سکه"],["coin_gram","سکه گرمی"]];
-var irAt=0,irBusy=false,irData=null,irPrev=null;
+var irAt=0,irBusy=false,irData=null,irPrev=null,irReg={},irStars=[];
+try{irStars=JSON.parse(ls("np_ir_stars")||"[]")||[]}catch(e){irStars=[]}
 function tm(n){return Number(Math.round(n)).toLocaleString("fa-IR")}
 function irPrevLoad(){try{return JSON.parse(ls("np_ir_prev")||"null")}catch(e){return null}}
 function irDelta(k,v){
@@ -843,13 +1019,19 @@ function irDelta(k,v){
   var c=(v-irPrev.v[k])/irPrev.v[k]*100,d=c>0?"up":"down";
   return '<span class="dl '+d+'">'+(c>0?"▲ +":"▼ ")+Math.abs(c).toFixed(2)+'%</span>';
 }
+function irStarBtn(k){var on=irStars.indexOf(k)>=0;return '<button type="button" class="star'+(on?" on":"")+'" data-istar="'+esc(k)+'" aria-label="ستاره‌دار" aria-pressed="'+on+'">'+(on?"★":"☆")+'</button>'}
 function irRow(ic,name,sub,k,v){
-  return '<div class="irow"><div class="ic">'+ic+'</div><div><b>'+esc(name)+'</b>'+(sub?'<small>'+esc(sub)+'</small>':'')+'</div><div class="v">'+tm(v)+'<small> تومان</small><br>'+irDelta(k,v)+'</div></div>';
+  irReg[k]={ic:ic,name:name,sub:sub,v:v};
+  return '<div class="irow" data-hist="'+k+'" data-id="ir:'+k+'" role="button" tabindex="0"><div class="ic">'+ic+'</div><div><div class="nmw"><b>'+esc(name)+'</b>'+irStarBtn(k)+'</div>'+(sub?'<small>'+esc(sub)+'</small>':'')+'</div><div class="v">'+tm(v)+'<small> تومان</small><br>'+irDelta(k,v)+'</div></div>';
 }
+function g24(d){return isFinite(d.gold_24k)?d.gold_24k:(isFinite(d.gold_18k)?d.gold_18k*24/18:null)}
 function irRender(d){
+  irReg={};
   var u=d.usd,dl=irDelta("usd",u);
-  $("#irUsd").innerHTML='<small>دلار آمریکا</small><div class="v">'+tm(u)+'<span>تومان</span></div>'+dl;
-  $("#irFx").innerHTML=IR_FX.filter(function(f){return f[0]!=="usd"&&isFinite(d[f[0]])}).map(function(f){return irRow(f[2],f[1],f[3]>1?"هر "+fa(f[3])+" واحد":"",f[0],d[f[0]]*(f[3]||1)/(f[3]||1))}).join("");
+  irReg.usd={ic:"🇺🇸",name:"دلار آمریکا",sub:"",v:u};
+  $("#irUsd").setAttribute("data-hist","usd");$("#irUsd").setAttribute("data-id","ir:usd");
+  $("#irUsd").innerHTML=irStarBtn("usd")+'<small>دلار آمریکا</small><div class="v">'+tm(u)+'<span>تومان</span></div>'+dl;
+  $("#irFx").innerHTML=IR_FX.filter(function(f){return f[0]!=="usd"&&isFinite(d[f[0]])}).map(function(f){return irRow(f[2],f[1],f[3]>1?"هر "+fa(f[3])+" واحد":"",f[0],d[f[0]])}).join("");
   var g="";
   if(isFinite(d.gold_mesghal))g+=irRow(iconSvg("gold"),"مثقال طلای آبشده","هر مثقال","gold_mesghal",d.gold_mesghal);
   if(isFinite(d.gold_18k)){
@@ -860,13 +1042,109 @@ function irRender(d){
   }
   $("#irGold").innerHTML=g||'<div class="msg">داده‌ای نیست.</div>';
   $("#irCoin").innerHTML=IR_COIN.filter(function(c){return isFinite(d[c[0]])}).map(function(c){return irRow(iconSvg("gold"),c[1],"",c[0],d[c[0]])}).join("");
+  // starred
+  var sd=irStars.filter(function(k){return irReg[k]});
+  $("#irStarCard").hidden=!sd.length;
+  $("#irStar").innerHTML=sd.map(function(k){var r=irReg[k];return '<div class="irow" data-hist="'+k+'" role="button" tabindex="0"><div class="ic">'+r.ic+'</div><div><div class="nmw"><b>'+esc(r.name)+'</b>'+irStarBtn(k)+'</div>'+(r.sub?'<small>'+esc(r.sub)+'</small>':'')+'</div><div class="v">'+tm(r.v)+'<small> تومان</small><br>'+irDelta(k,r.v)+'</div></div>'}).join("");
+  // world
   var w="";
   var ou=d.gold_ounce||d.usd_xau;
-  if(isFinite(ou))w+='<div class="irow"><div class="ic">'+iconSvg("gold")+'</div><div><b>اونس جهانی طلا</b></div><div class="v"><span class="num">$'+fmt(ou,2)+'</span></div></div>';
+  if(isFinite(ou))w+='<div class="irow" style="cursor:default"><div class="ic">'+iconSvg("gold")+'</div><div><b>اونس جهانی طلا</b></div><div class="v"><span class="num">$'+fmt(ou,2)+'</span></div></div>';
   var oil=parseFloat(d.oil);
-  if(isFinite(oil))w+='<div class="irow"><div class="ic">'+iconSvg("oil2")+'</div><div><b>نفت برنت</b></div><div class="v"><span class="num">$'+fmt(oil,2)+'</span></div></div>';
+  if(isFinite(oil))w+='<div class="irow" style="cursor:default"><div class="ic">'+iconSvg("oil2")+'</div><div><b>نفت برنت</b></div><div class="v"><span class="num">$'+fmt(oil,2)+'</span></div></div>';
   $("#irWorld").innerHTML=w||'<div class="msg">داده‌ای نیست.</div>';
+  irBubble(d);irRatio(d);clCalc();
 }
+/* bubble */
+var COIN_G={coin_emami:8.133,coin_bahar:8.133,coin_half:4.0665,coin_quarter:2.03325};
+function irBubble(d){
+  var g=g24(d),h="";
+  if(g)IR_COIN.forEach(function(c){
+    var w=COIN_G[c[0]];if(!w||!isFinite(d[c[0]]))return;
+    var intr=w*0.9*g,bb=d[c[0]]-intr,pc=bb/intr*100;
+    h+='<div class="bub"><b>'+esc(c[1])+'</b><span class="num">'+tm(intr)+'</span><span class="dl '+(bb>=0?"up":"down")+'">'+(bb>=0?"+":"")+pc.toFixed(1)+'%</span></div>';
+  });
+  $("#irBub").innerHTML=h?'<div class="bub" style="color:var(--muted)"><span>سکه</span><span>ارزش طلا (تومان)</span><span>حباب</span></div>'+h:'<div class="msg">داده‌ای نیست.</div>';
+}
+/* ratios */
+function irRatio(d){
+  var u=d.usd,h="",g=g24(d),oz=d.gold_ounce||d.usd_xau;
+  if(isFinite(d.coin_emami))h+='<div class="kv2"><span>سکه امامی به دلار</span><b>$'+fmt(d.coin_emami/u,0)+'</b></div>';
+  if(isFinite(d.gold_18k))h+='<div class="kv2"><span>هر گرم ۱۸ عیار به دلار</span><b>$'+fmt(d.gold_18k/u,2)+'</b></div>';
+  if(g&&isFinite(oz)){
+    var imp=g*31.1035/oz,df=(u-imp)/imp*100;
+    h+='<div class="kv2"><span>دلار ضمنی طلا</span><b>'+tm(imp)+' تومان</b></div>';
+    h+='<div class="kv2"><span>دلار بازار نسبت به ضمنی</span><b style="color:var(--'+(df>=0?"up":"down")+')">'+(df>=0?"+":"")+df.toFixed(1)+'%</b></div>';
+    h+='<div class="msg" style="padding-top:4px">'+(Math.abs(df)<1.5?"دلار و طلای داخلی تقریباً هماهنگ‌اند.":df>0?"دلار نسبت به طلا گران‌تر قیمت‌گذاری شده است.":"دلار نسبت به طلا ارزان‌تر قیمت‌گذاری شده است.")+'</div>';
+  }
+  h+='<div id="irFall" class="msg" style="padding-top:6px">در حال محاسبه افت ارزش ریال...</div>';
+  $("#irRatio").innerHTML=h;
+  irHist("usd").then(function(a){
+    if(!a||a.length<10){$("#irFall").textContent="";return}
+    var last=a[a.length-1],o=function(n){return a[Math.max(0,a.length-1-n)]};
+    function line(label,x){var c=(last.p-x.p)/x.p*100,loss=(1-x.p/last.p)*100;return '<div class="kv2"><span>دلار نسبت به '+label+'</span><b style="color:var(--down)">+'+c.toFixed(1)+'%</b></div><div class="kv2"><span>ارزش ریال در برابر دلار</span><b style="color:var(--down)">-'+loss.toFixed(1)+'%</b></div>'}
+    var f=$("#irFall");if(!f)return;
+    f.outerHTML='<div id="irFall">'+line("۳۰ روز پیش",o(30))+(a.length>200?line("یک سال پیش",o(365>a.length-1?a.length-1:365)):line("ابتدای تاریخچه ("+(a[0].d||"")+")",a[0]))+'</div>';
+  }).catch(function(){var f=$("#irFall");if(f)f.textContent=""});
+}
+/* history */
+var irHC={};
+async function irHist(key){
+  var base=key,fac=1,m=/^k(\d+)$/.exec(key);
+  if(m){base="gold_18k";fac=parseInt(m[1],10)/18}
+  if(!irHC[base]){
+    var urls=["https://itsyebekhe.github.io/nabz/api/history_"+base+".json","https://raw.githubusercontent.com/itsyebekhe/nabz/main/api/history_"+base+".json","https://cdn.jsdelivr.net/gh/itsyebekhe/nabz@main/api/history_"+base+".json"],j=null;
+    for(var i=0;i<urls.length&&!j;i++){try{j=await getJSON(urls[i]+"?t="+Math.floor(Date.now()/3600000),20000)}catch(e){}}
+    if(!j||!j.history||!j.history.length)throw new Error("nohist");
+    irHC[base]=j.history.map(function(x){return {d:x.date,p:parseFloat(x.price)}}).filter(function(x){return isFinite(x.p)});
+  }
+  return irHC[base].map(function(x){return {d:x.d,p:x.p*fac}});
+}
+var hKey="",hArr=null,hN=30;
+function hDraw(){
+  if(!hArr)return;
+  var a=hN?hArr.slice(-hN):hArr;
+  if(a.length<2){$("#hChart").innerHTML='<div class="msg">داده کافی نیست.</div>';return}
+  var W=340,H=190,pd=8,mn=Math.min.apply(null,a.map(function(x){return x.p})),mx=Math.max.apply(null,a.map(function(x){return x.p})),r=mx-mn||1;
+  var xs=a.map(function(_,i){return pd+i*(W-2*pd)/(a.length-1)}),ys=a.map(function(x){return H-22-(x.p-mn)/r*(H-44)});
+  var d="M"+xs.map(function(x,i){return x.toFixed(1)+" "+ys[i].toFixed(1)}).join(" L");
+  var up=a[a.length-1].p>=a[0].p,col=up?"var(--up)":"var(--down)";
+  $("#hChart").innerHTML='<svg class="ch" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="hg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+col+'" stop-opacity=".3"/><stop offset="1" stop-color="'+col+'" stop-opacity="0"/></linearGradient></defs><path d="'+d+' L'+xs[xs.length-1].toFixed(1)+' '+H+' L'+xs[0].toFixed(1)+' '+H+' Z" fill="url(#hg)"/><path d="'+d+'" fill="none" stroke="'+col+'" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>'+
+   '<div class="fgm" style="direction:rtl"><span>'+esc(a[a.length-1].d||"")+'</span><span>'+esc(a[0].d||"")+'</span></div>';
+  var c=(a[a.length-1].p-a[0].p)/a[0].p*100;
+  $("#hVal").innerHTML='<span>کمترین '+tm(mn)+' · بیشترین '+tm(mx)+'</span><span class="dl '+(up?"up":"down")+'">'+(c>=0?"+":"")+c.toFixed(2)+'%</span>';
+}
+async function hOpen(key){
+  var r=irReg[key];hKey=key;hArr=null;
+  $("#hTitle").textContent=(r?r.name:key);
+  $("#hChart").innerHTML='<div class="sk" style="height:190px"></div>';$("#hVal").innerHTML="";
+  $("#hist").classList.add("on");
+  try{hArr=await irHist(key);hDraw()}catch(e){$("#hChart").innerHTML='<div class="msg">تاریخچه این مورد در دسترس نیست.</div>'}
+}
+$("#hClose").addEventListener("click",function(){$("#hist").classList.remove("on")});
+$("#hist").addEventListener("click",function(e){if(e.target===$("#hist"))$("#hist").classList.remove("on")});
+$("#hRng").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;hN=parseInt(b.getAttribute("data-n"),10);$$("#hRng button").forEach(function(x){x.setAttribute("aria-pressed",x===b?"true":"false")});hDraw()});
+$("#iran").addEventListener("click",function(e){
+  var st=e.target.closest("[data-istar]");
+  if(st){e.stopPropagation();var k=st.getAttribute("data-istar"),i=irStars.indexOf(k);if(i>=0)irStars.splice(i,1);else irStars.push(k);ls("np_ir_stars",JSON.stringify(irStars));if(irData)irRender(irData);return}
+  var h=e.target.closest("[data-hist]");if(h)hOpen(h.getAttribute("data-hist"));
+});
+/* calculator */
+function clCalc(){
+  var d=irData,out=$("#clOut");if(!d){return}
+  var t=$("#clType").value,q=parseFloat($("#clQ").value),isG=t==="gold";
+  $("#clKw").style.display=isG?"":"none";
+  $("#clU").textContent=isG?"وزن به گرم":"تعداد";
+  if(!isFinite(q)||q<0){out.textContent="—";return}
+  var unit;
+  if(isG){var k=parseInt($("#clK").value,10);unit=(k===24&&isFinite(d.gold_24k))?d.gold_24k:d.gold_18k*k/18}
+  else unit=d[t];
+  if(!isFinite(unit)){out.innerHTML='—<small>قیمت در دسترس نیست</small>';return}
+  var tot=unit*q,extra="";
+  if(!isG&&COIN_G[t]&&g24(d)){var intr=COIN_G[t]*0.9*g24(d)*q;extra='<small>ارزش طلای داخل سکه: '+tm(intr)+' تومان</small>'}
+  out.innerHTML=tm(tot)+' تومان'+(d.usd?'<small>حدود $'+fmt(tot/d.usd,2)+'</small>':'')+extra;
+}
+["#clType","#clK","#clQ"].forEach(function(q){$(q).addEventListener("input",clCalc)});
 async function loadIran(){
   if(irBusy)return;irBusy=true;
   var d=null;
@@ -898,9 +1176,58 @@ async function loadIran(){
   irAt=Date.now();irBusy=false;
   $("#irRefresh").classList.remove("spinning");
   if(d)$("#irTxt").textContent+="، بررسی شد "+new Date().toLocaleTimeString("fa-IR",{hour:"2-digit",minute:"2-digit"});
+  convBuild();
 }
 $("#irRefresh").addEventListener("click",loadIran);
 setInterval(function(){if(current==="iran"&&Date.now()-irAt>300000)loadIran()},30000);
+
+/* ---------- global search ---------- */
+function nz(t){return String(t||"").toLowerCase().replace(/ي/g,"ی").replace(/ك/g,"ک").replace(/[‌‏‎]/g," ").replace(/[۰-۹]/g,function(c){return String("۰۱۲۳۴۵۶۷۸۹".indexOf(c))}).replace(/\s+/g," ").trim()}
+var SM_SECS=["ترس و طمع","جریان استیبل‌کوین","بایننس فیوچرز","سرمایه باز","نرخ تأمین مالی","هایپرلیکوید","دیفی لاما","سایت‌های مرجع"];
+function srchIndex(){
+  var ix=[];
+  FX.forEach(function(m){ix.push({l:m.name,s:m.sym,t:"pulse",q:'.asset[data-id="'+m.id+'"]',h:nz(m.name+" "+m.sym+" "+m.id)})});
+  cryptoAll.forEach(function(m){ix.push({l:m.name,s:m.code,t:"pulse",q:'.asset[data-id="'+m.id+'"]',pin:m.id,h:nz(m.name+" "+m.en+" "+m.code)})});
+  Object.keys(irReg).forEach(function(k){var r=irReg[k];ix.push({l:r.name,s:"داخلی",t:"iran",q:'[data-id="ir:'+k+'"]',h:nz(r.name+" "+(r.sub||"")+" "+k)})});
+  SM_SECS.forEach(function(n){ix.push({l:n,s:"پول هوشمند",t:"smart",q:'#smart [aria-label="'+n+'"]',h:nz(n)})});
+  ix.push({l:"ماشین‌حساب تبدیل",s:"نبض",t:"pulse",q:'[aria-label="ماشین‌حساب تبدیل"]',h:nz("ماشین حساب تبدیل مبدل")});
+  ix.push({l:"ماشین‌حساب طلا و سکه",s:"داخلی",t:"iran",q:'[aria-label="ماشین‌حساب طلا و سکه"]',h:nz("ماشین حساب طلا سکه")});
+  ix.push({l:"حباب سکه",s:"داخلی",t:"iran",q:'[aria-label="حباب سکه"]',h:nz("حباب سکه")});
+  ix.push({l:"واکنش بازار",s:"تب",t:"news",q:null,h:nz("واکنش بازار تقویم خبر اقتصادی")});
+  ix.push({l:"اسکنر RSI",s:"تب",t:"rsi",q:null,h:nz("اسکنر rsi آر اس آی")});
+  return ix;
+}
+function srchRun(){
+  var q=nz($("#srchIn").value),box=$("#srchRes");
+  if(!q){box.innerHTML='<div class="em">نام ارز، طلا، سکه یا بخش مورد نظر را بنویس.</div>';return}
+  var toks=q.split(" "),ix=srchIndex().filter(function(x){return toks.every(function(t){return x.h.indexOf(t)>=0})}).slice(0,25);
+  box.innerHTML=ix.length?ix.map(function(x,i){return '<button type="button" class="it" data-i="'+i+'"><b>'+esc(x.l)+'</b><small>'+esc(x.s)+'</small></button>'}).join(""):'<div class="em">چیزی پیدا نشد.</div>';
+  box._ix=ix;
+}
+function srchOpen(){$("#srch").classList.add("on");$("#srchIn").value="";srchRun();setTimeout(function(){$("#srchIn").focus()},50)}
+function srchClose(){$("#srch").classList.remove("on")}
+$("#srchIn").addEventListener("input",srchRun);
+$("#srch").addEventListener("click",function(e){
+  if(e.target===$("#srch")){srchClose();return}
+  var b=e.target.closest(".it");if(!b)return;
+  var x=$("#srchRes")._ix[parseInt(b.getAttribute("data-i"),10)];
+  srchClose();
+  if(x.pin&&crypto10.every(function(m){return m.id!==x.pin})&&stars.indexOf(x.pin)<0){pinned=x.pin;filter="all";$$(".chip").forEach(function(c){c.setAttribute("aria-pressed",c.getAttribute("data-f")==="all"?"true":"false")});render()}
+  show(x.t);
+  if(x.q)setTimeout(function(){
+    var el=document.querySelector((x.t==="pulse"&&x.pin&&pinned===x.pin?'[aria-label="نتیجه جستجو"] ':'')+x.q)||document.querySelector(x.q);
+    if(el){el.scrollIntoView({behavior:"smooth",block:"center"});el.classList.remove("hl");void el.offsetWidth;el.classList.add("hl")}
+  },380);
+});
+document.addEventListener("click",function(e){if(e.target.closest&&e.target.closest(".searchBtn"))srchOpen()});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"){srchClose();$("#hist").classList.remove("on")}});
+
+/* ---------- install on phone ---------- */
+var deferredInstall=null;
+window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();deferredInstall=e;var b=$("#installBtn");if(b)b.hidden=false});
+$("#installBtn").addEventListener("click",function(){if(!deferredInstall)return;deferredInstall.prompt();deferredInstall.userChoice.finally(function(){deferredInstall=null;$("#installBtn").hidden=true})});
+window.addEventListener("appinstalled",function(){var b=$("#installBtn");if(b)b.hidden=true});
+try{if("serviceWorker" in navigator&&location.protocol==="https:")navigator.serviceWorker.register("sw.js")}catch(e){}
 
 /* ---------- tabs ---------- */
 var current="pulse",loaded={};

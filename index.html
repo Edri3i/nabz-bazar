@@ -225,9 +225,7 @@ nav button[aria-selected="true"]{background:var(--accent-soft);color:var(--accen
           <p>قیمت زنده ارز، طلا، نقره، نفت و ارزهای دیجیتال</p>
         </div>
         <div class="tools">
-          <button type="button" class="pill-btn" id="theme" aria-label="تغییر حالت روز و شب">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
-          </button>
+          <button type="button" class="pill-btn themeBtn" aria-label="تغییر حالت روز و شب"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button>
           <div class="ring">
             <svg viewBox="0 0 42 42" aria-hidden="true"><circle class="tr" cx="21" cy="21" r="19" fill="none" stroke-width="3"/><circle class="pg" id="pg" cx="21" cy="21" r="19" fill="none" stroke-width="3" stroke-linecap="round" stroke-dasharray="119.4" stroke-dashoffset="119.4"/></svg>
             <button type="button" class="pill-btn" id="refresh" aria-label="به‌روزرسانی همین حالا">
@@ -264,7 +262,7 @@ nav button[aria-selected="true"]{background:var(--accent-soft);color:var(--accen
     </div>
 
     <div id="board" class="sec" style="gap:14px"></div>
-    <div class="foot">داده‌ها تقریبی و برای اطلاع هستند و توصیه معاملاتی نیستند. فارکس، فلزات و نفت از Yahoo Finance و کریپتو از CoinGecko می‌آید.</div>
+    <div class="foot">داده‌ها تقریبی و برای اطلاع هستند و توصیه معاملاتی نیستند.</div>
   </div>
 </main>
 
@@ -277,7 +275,7 @@ nav button[aria-selected="true"]{background:var(--accent-soft);color:var(--accen
           <h1>داخلی</h1>
           <p>قیمت ارز، طلا و سکه در بازار ایران به تومان</p>
         </div>
-        <div class="tools"><button type="button" class="pill-btn" id="irRefresh" aria-label="به‌روزرسانی">
+        <div class="tools"><button type="button" class="pill-btn themeBtn" aria-label="تغییر حالت روز و شب"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button><button type="button" class="pill-btn" id="irRefresh" aria-label="به‌روزرسانی">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg></button></div>
       </div>
       <div class="live"><span class="dot" id="irDot"></span><span id="irTxt">در حال دریافت...</span></div>
@@ -287,16 +285,16 @@ nav button[aria-selected="true"]{background:var(--accent-soft);color:var(--accen
     <section class="card" aria-label="طلا"><h2>طلا <small>تومان</small></h2><div id="irGold"></div></section>
     <section class="card" aria-label="سکه"><h2>سکه <small>تومان</small></h2><div id="irCoin"></div></section>
     <section class="card" aria-label="جهانی"><h2>بازار جهانی <small>دلار</small></h2><div id="irWorld"></div></section>
-    <div class="foot">قیمت‌ها تقریبی و از پروژه متن‌باز <a href="https://github.com/itsyebekhe/nabz" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">nabz</a> گرفته می‌شود که خودش از سایت علان‌چنج می‌خواند. هر ۳۰ دقیقه به‌روز می‌شود و ممکن است با قیمت لحظه‌ای بازار تفاوت داشته باشد. عیارهای ۲۰، ۲۱، ۲۲، ۲۴ و ۱۴ از روی ۱۸ عیار محاسبه می‌شوند.</div>
+    <div class="foot">قیمت‌ها تقریبی هستند و ممکن است با قیمت لحظه‌ای بازار تفاوت داشته باشند. عیارهای ۲۰، ۲۱، ۲۲، ۲۴ و ۱۴ از روی ۱۸ عیار محاسبه می‌شوند.</div>
   </div>
 </main>
 
 <main id="smart" class="panel" aria-label="پول هوشمند">
   <div class="wrap">
     <header class="hero">
-      <div class="by">Written by Ali Edrisi</div>
+      <div class="hero-top"><div><div class="by">Written by Ali Edrisi</div>
       <h1>پول هوشمند</h1>
-      <p>رفتار معامله‌گران بزرگ و جریان پول در بازار</p>
+      <p>رفتار معامله‌گران بزرگ و جریان پول در بازار</p></div><div class="tools"><button type="button" class="pill-btn themeBtn" aria-label="تغییر حالت روز و شب"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button></div></div>
       <div class="live"><span class="dot" id="smDot"></span><span id="smTxt">در حال دریافت...</span></div>
     </header>
 
@@ -328,12 +326,12 @@ nav button[aria-selected="true"]{background:var(--accent-soft);color:var(--accen
 </main>
 
 <section id="frame-news" class="frame" aria-label="واکنش بازار">
-  <div class="fbar"><b>واکنش بازار</b><button type="button" data-reload="news">بارگذاری مجدد</button><a id="open-news" target="_blank" rel="noopener" href="#">باز کردن جدا</a></div>
+  <div class="fbar"><b>واکنش بازار</b><button type="button" class="pill-btn themeBtn" style="width:34px;height:34px;padding:0" aria-label="تغییر حالت روز و شب"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button><button type="button" data-reload="news">بارگذاری مجدد</button><a id="open-news" target="_blank" rel="noopener" href="#">باز کردن جدا</a></div>
   <div class="fwrap"><iframe id="if-news" title="واکنش بازار" referrerpolicy="no-referrer"></iframe><div class="floading" id="ld-news"><span>در حال باز کردن...</span><span id="hint-news" hidden>اگر باز نشد، «باز کردن جدا» را بزن.</span></div></div>
 </section>
 
 <section id="frame-rsi" class="frame" aria-label="اسکنر RSI">
-  <div class="fbar"><b>اسکنر RSI</b><button type="button" data-reload="rsi">بارگذاری مجدد</button><a id="open-rsi" target="_blank" rel="noopener" href="#">باز کردن جدا</a></div>
+  <div class="fbar"><b>اسکنر RSI</b><button type="button" class="pill-btn themeBtn" style="width:34px;height:34px;padding:0" aria-label="تغییر حالت روز و شب"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button><button type="button" data-reload="rsi">بارگذاری مجدد</button><a id="open-rsi" target="_blank" rel="noopener" href="#">باز کردن جدا</a></div>
   <div class="fwrap"><iframe id="if-rsi" title="اسکنر RSI" referrerpolicy="no-referrer"></iframe><div class="floading" id="ld-rsi"><span>در حال باز کردن...</span><span id="hint-rsi" hidden>اگر باز نشد، «باز کردن جدا» را بزن.</span></div></div>
 </section>
 
@@ -369,11 +367,23 @@ function fa(n){return Number(n).toLocaleString("fa-IR")}
 /* ---------- theme ---------- */
 var root=document.documentElement;
 function curTheme(){return root.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}
-function syncFrames(){["news","rsi"].forEach(function(k){var f=document.getElementById("if-"+k);try{f&&f.contentWindow&&f.contentWindow.postMessage({type:"np-theme",theme:curTheme()},"*")}catch(e){}})}
+function syncFrames(){
+  var t=curTheme();
+  ["news","rsi"].forEach(function(k){
+    var f=document.getElementById("if-"+k);if(!f||!f.contentWindow)return;
+    try{f.contentWindow.postMessage({type:"np-theme",theme:t},"*")}catch(e){}
+    if(k==="rsi"){
+      try{
+        var w=f.contentWindow;
+        w.eval('try{state.theme="'+t+'";applyTheme();if(typeof savePrefs==="function")savePrefs()}catch(e){document.documentElement.setAttribute("data-theme","'+t+'")}');
+        var b=w.document.getElementById("theme");if(b)b.style.display="none";
+      }catch(e){try{f.contentWindow.document.documentElement.setAttribute("data-theme",t)}catch(e2){}}
+    }
+  });
+}
 function setTheme(m){if(m==="light"||m==="dark")root.setAttribute("data-theme",m);else root.removeAttribute("data-theme");ls("np_theme",m||"");syncFrames()}
-$("#theme").addEventListener("click",function(){
-  var cur=root.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
-  setTheme(cur==="dark"?"light":"dark");
+document.addEventListener("click",function(e){
+  if(e.target.closest&&e.target.closest(".themeBtn"))setTheme(curTheme()==="dark"?"light":"dark");
 });
 (function(){var t=ls("np_theme");if(t==="light"||t==="dark")setTheme(t)})();
 
@@ -700,6 +710,7 @@ var irAt=0,irBusy=false,irData=null,irPrev=null;
 function tm(n){return Number(Math.round(n)).toLocaleString("fa-IR")}
 function irPrevLoad(){try{return JSON.parse(ls("np_ir_prev")||"null")}catch(e){return null}}
 function irDelta(k,v){
+  if(irData&&irData.chg&&isFinite(irData.chg[k])&&irData.chg[k]!==0){var cc=irData.chg[k],dd=cc>0?"up":"down";return '<span class="dl '+dd+'">'+(cc>0?"▲ +":"▼ ")+Math.abs(cc).toFixed(2)+'%</span>'}
   if(!irPrev||!irPrev.v||!isFinite(irPrev.v[k])||!irPrev.v[k]||irPrev.v[k]===v)return "";
   var c=(v-irPrev.v[k])/irPrev.v[k]*100,d=c>0?"up":"down";
   return '<span class="dl '+d+'">'+(c>0?"▲ +":"▼ ")+Math.abs(c).toFixed(2)+'%</span>';
@@ -715,7 +726,7 @@ function irRender(d){
   if(isFinite(d.gold_mesghal))g+=irRow(iconSvg("gold"),"مثقال طلای آبشده","هر مثقال","gold_mesghal",d.gold_mesghal);
   if(isFinite(d.gold_18k)){
     [[24,"۲۴ عیار"],[22,"۲۲ عیار"],[21,"۲۱ عیار"],[20,"۲۰ عیار"],[18,"۱۸ عیار"],[14,"۱۴ عیار"]].forEach(function(k){
-      var v=d.gold_18k*k[0]/18;
+      var v=(k[0]===24&&isFinite(d.gold_24k))?d.gold_24k:d.gold_18k*k[0]/18;
       g+=irRow(iconSvg("gold"),"طلای "+k[1],k[0]===18?"هر گرم":"هر گرم، محاسبه‌شده","k"+k[0],v);
     });
   }
@@ -732,7 +743,9 @@ async function loadIran(){
   if(irBusy)return;irBusy=true;
   var d=null;
   $("#irRefresh").classList.add("spinning");
-  var rs=await Promise.allSettled(IR_SRC.map(function(u){return getJSON(u+"?t="+Date.now(),15000)}));
+  var wk=workerUrl();
+  if(wk){try{var lj=await getJSON(wk+"/iran",15000);if(lj&&isFinite(lj.usd))d=lj}catch(e){}}
+  var rs=d?[]:await Promise.allSettled(IR_SRC.map(function(u){return getJSON(u+"?t="+Date.now(),15000)}));
   rs.forEach(function(r){
     if(r.status==="fulfilled"&&r.value&&isFinite(r.value.usd)){
       if(!d||String(r.value.updated_at||"")>String(d.updated_at||""))d=r.value;

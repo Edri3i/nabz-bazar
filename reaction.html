@@ -57,6 +57,8 @@ html.hub[data-theme="dark"]{
 html.hub .seg button[aria-pressed="true"],html.hub .next{color:#fff}
 html.hub[data-theme="dark"] .seg button[aria-pressed="true"]{color:#17143a}
 html.hub #themeSeg{display:none}
+.tvl{color:inherit;text-decoration:none;border-bottom:1px dotted var(--accent)}
+.tvl::after{content:" ↗";font-size:10px;color:var(--accent)}
 .tag.alt{background:var(--surface-2);color:var(--fg-dim);border:1px solid var(--line);margin-inline-start:6px}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--fg);font-family:var(--font);line-height:1.7;font-size:15px}
@@ -261,6 +263,7 @@ setTheme(store("vb_theme")||"auto");
 /* ---------- reference data ---------- */
 var CURS=["USD","EUR","GBP","CHF","CAD","NZD","CNY"];
 var HIDE={AUD:1,JPY:1};
+var TVMAP={XAUUSD:"OANDA:XAUUSD",XAGUSD:"OANDA:XAGUSD",EURUSD:"FX:EURUSD",GBPUSD:"FX:GBPUSD",USDCHF:"FX:USDCHF",USDCAD:"FX:USDCAD",NZDUSD:"FX:NZDUSD",WTI:"TVC:USOIL",BTCUSD:"BINANCE:BTCUSDT"};
 var ASSETS=[
  {id:"XAUUSD",fa:"طلا (اونس)",base:6,unit:"دلار",dec:0},
  {id:"EURUSD",fa:"یورو/دلار",base:15,unit:"پیپ",dec:0},
@@ -638,7 +641,7 @@ function assetRows(it,strong,tilt){
     var txt=abs<0.15?"اثر ناچیز":(eff>0?"▲ ":"▼ ")+(tilt?"سوگیری ":"")+(eff>0?"صعودی":"نزولی");
     var bar="";for(var i=0;i<4;i++)bar+='<i class="'+(i<lvl?"f":"")+'"></i>';
     var rng=abs<0.15?"معمولاً در حد نوسان عادی":(tilt?"بر پایه انتظار بازار پیش از خبر":"حدود "+fmt(lo,a.dec)+" تا "+fmt(hi,a.dec)+" "+a.unit);
-    return '<div class="as"><b>'+a.fa+'<small>'+a.id+'</small></b><span class="dir '+cls+'">'+txt+'</span>'+
+    return '<div class="as"><b><a class="tvl" target="_blank" rel="noopener noreferrer" href="https://www.tradingview.com/chart/?symbol='+encodeURIComponent(TVMAP[a.id]||a.id)+'">'+a.fa+'</a><small>'+a.id+'</small></b><span class="dir '+cls+'">'+txt+'</span>'+
       '<span class="rng">'+rng+'</span><span class="bar '+cls+'" aria-hidden="true">'+bar+'</span></div>';
   }).join("");
 }
